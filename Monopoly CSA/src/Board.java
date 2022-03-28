@@ -1,8 +1,5 @@
 
 
-
-	
-
 		import java.awt.Color;
 		import java.awt.Dimension;
 		import java.awt.Font;
@@ -52,7 +49,7 @@
 		
 				
 
-				JFrame f = new JFrame("DungeonCrawler");
+				JFrame f = new JFrame("Monopoly");
 				f.setSize(new Dimension(1900, 1200));
 				f.setBackground(Color.blue);
 				f.add(this);
