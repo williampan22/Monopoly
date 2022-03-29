@@ -1,5 +1,5 @@
 
-
+	//Branches?
 		import java.awt.Color;
 		import java.awt.Dimension;
 		import java.awt.Font;
@@ -49,7 +49,7 @@
 				
 		
 				
-
+  
 				JFrame f = new JFrame("Monopoly");
 				f.setSize(new Dimension(946, 970));
 				f.setBackground(Color.blue);
@@ -62,7 +62,7 @@
 				t.start();
 				f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				f.setVisible(true);
-
+				
 			}
 
 			@Override
