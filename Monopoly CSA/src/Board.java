@@ -45,7 +45,7 @@
 
 			public Board() {
 
-				Random rnd = new Random();//a
+				Random rnd = new Random();//aa
 				
 		
 				

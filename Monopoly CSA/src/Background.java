@@ -26,7 +26,7 @@ public class Background{
 		Graphics2D g2 = (Graphics2D) g;
 		
 		
-		//call update to update the actualy picture location
+		//call update to update the actualy picture locationa
 		update();
 		
 		
