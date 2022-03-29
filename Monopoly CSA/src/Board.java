@@ -22,7 +22,7 @@
 
 		public class Board extends JPanel implements ActionListener, MouseListener, KeyListener {
 
-
+			Background bg = new Background(0,0);
 			
 			// CREATE THE OBJECT (STEP 1)
 			Random rnd = new Random();
@@ -31,6 +31,7 @@
 
 			public void paint(Graphics g) {
 				super.paintComponent(g);
+				bg.paint(g);
 			}
 
 			private Image getImage(String string) {
@@ -50,7 +51,7 @@
 				
 
 				JFrame f = new JFrame("Monopoly");
-				f.setSize(new Dimension(1900, 1200));
+				f.setSize(new Dimension(946, 970));
 				f.setBackground(Color.blue);
 				f.add(this);
 				f.setResizable(true);
