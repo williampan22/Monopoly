@@ -51,7 +51,7 @@
 				
 
 				JFrame f = new JFrame("Monopoly");
-				f.setSize(new Dimension(946, 970));
+				f.setSize(new Dimension(1900, 1035));
 				f.setBackground(Color.blue);
 				f.add(this);
 				f.setResizable(true);
