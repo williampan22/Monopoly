@@ -28,7 +28,7 @@
 			Random rnd = new Random();
 
 			
-
+  
 			public void paint(Graphics g) {
 				super.paintComponent(g);
 				bg.paint(g);
