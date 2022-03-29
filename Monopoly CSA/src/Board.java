@@ -1,6 +1,6 @@
 
 
-		import java.awt.Color; //color
+		import java.awt.Color;
 		import java.awt.Dimension;
 		import java.awt.Font;
 		import java.awt.Graphics;
@@ -44,7 +44,7 @@
 
 			public Board() {
 
-				Random rnd = new Random();
+				Random rnd = new Random();//a
 				
 		
 				
