@@ -1,5 +1,5 @@
 
-import java.awt.Color;
+import java.awt.Color; 
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -21,7 +21,7 @@ import javax.swing.Timer;
 
 public class Board extends JPanel implements ActionListener, MouseListener, KeyListener {
 
-	Background bg = new Background(0, 0);
+	Background bg = new Background(0, 0); //a
 	
 
 	// CREATE THE OBJECT (STEP 1)
