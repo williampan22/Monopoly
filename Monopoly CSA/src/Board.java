@@ -21,7 +21,7 @@ import javax.swing.Timer;
 
 public class Board extends JPanel implements ActionListener, MouseListener, KeyListener {
 
-	Background bg = new Background(0, 0); //a
+	Background bg = new Background(0, 0); //aa
 	
 
 	// CREATE THE OBJECT (STEP 1)

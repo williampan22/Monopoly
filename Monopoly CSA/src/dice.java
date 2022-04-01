@@ -6,7 +6,7 @@
 	    public static void main(String[] args) {
 	    	while (true)  
 	    	{ 
-	    	  int diceX=(int)(Math.random()*6+1); 
+	    	  int diceX=(int)(Math.random()*6+1); //a
 	    	  int diceY=(int)(Math.random()*6+1); 
 	    	  int sum1 = diceX + diceY; 
 	    	  System.out.println("Roll : total = " + sum1);  
