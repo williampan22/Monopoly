@@ -9,7 +9,7 @@ import java.net.URL;
 
 public class Background{
 	
-	//add location attributes
+	//add location attributesa
 	private Image img; 	
 	private AffineTransform tx;
 
@@ -26,7 +26,7 @@ public class Background{
 		Graphics2D g2 = (Graphics2D) g;
 		
 		
-		//call update to update the actualy picture location
+		//call update to update the actualy picture locationa
 		update();
 		
 		
@@ -46,7 +46,7 @@ public class Background{
 	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
-		tx.scale(.62, .62);
+		tx.scale(1, 1);
 	}
 
 	private Image getImage(String path) {
