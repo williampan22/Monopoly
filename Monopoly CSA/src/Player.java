@@ -23,11 +23,12 @@ public class Player {
 	public Player(int playerNumber, String avatar) {
 		this.playerNumber = playerNumber;
 		this.avatar = avatar;
-
-			img = getImage("/imgs/wall.png"); //load the image for Tree
+			x = 870; 
+			y = 900; 
+			img = getImage("/imgs/" + avatar); //load the image for Tree
 			tx = AffineTransform.getTranslateInstance(x, y );
 			init(x, y); 				//initialize the location of the image
-								
+			
 			//use your variables
 	}
 
@@ -56,7 +57,7 @@ public class Player {
 		
 		private void init(double a, double b) {
 			tx.setToTranslation(a, b);
-			tx.scale(2.7, 2.4);
+			tx.scale(.3, .3);
 		}
 
 		private Image getImage(String path) {

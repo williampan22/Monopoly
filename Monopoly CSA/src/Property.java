@@ -1,7 +1,7 @@
 
 public class Property { //a
 	
-	private String name; 
+	private String name;
 	private int x; 
 	private int y; 
 	private String owner; 
@@ -18,7 +18,86 @@ public class Property { //a
 	}
 	
 	
-	
+	public String getName() {
+		return name;
+	}
+
+
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+
+
+	public int getX() {
+		return x;
+	}
+
+
+
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+
+
+
+	public int getY() {
+		return y;
+	}
+
+
+
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+
+
+
+	public String getOwner() {
+		return owner;
+	}
+
+
+
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+
+
+
+	public int getPrice() {
+		return price;
+	}
+
+
+
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+
+
+
+	public int getPay() {
+		return pay;
+	}
+
+
+
+
+	public void setPay(int pay) {
+		this.pay = pay;
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

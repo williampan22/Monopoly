@@ -22,8 +22,11 @@ import javax.swing.Timer;
 public class Board extends JPanel implements ActionListener, MouseListener, KeyListener {
 
 	Background bg = new Background(0, 0); //aa
+	Player player0 = new Player(0, "Car.png"); 
+	Player player1 = new Player(1, "Dog.png"); 
+	Player player2 = new Player(2, "Hat.png"); 
+	 int turn = 0; 
 	
-
 	// CREATE THE OBJECT (STEP 1)
 	Random rnd = new Random();
 	//https://www.falstad.com/monopoly.html
@@ -66,20 +69,41 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		Property p31 = new Property("Pacific Avenue","", 940 , 170, 300, 26);
 		Property p32 = new Property("North Carolina Avenue","", 940 , 250, 300, 26);
-		Property p33 = new Property("Community Chest","", 940, 0, 0, 0); 		//special
-		Property p34 = new Property("Pennsylvania Avenue","", 940, 0, 320, 28);
-		Property p35 = new Property("Short Line","", 940, 0, 200, 25);
-		Property p36 = new Property("Chance","", 940, 0, 0, 0); 				//special
-		Property p37 = new Property("Park Place","", 940, 0, 350, 38);
-		Property p38 = new Property("Luxury Tax","", 940, 0, 0, -100);		//special
-		Property p39 = new Property("Boardwalk","", 940, 0, 400, 50);
+		Property p33 = new Property("Community Chest","", 940, 330, 0, 0); 		//special
+		Property p34 = new Property("Pennsylvania Avenue","", 940, 410, 320, 28);
+		Property p35 = new Property("Short Line","", 940, 490, 200, 25);
+		Property p36 = new Property("Chance","", 940, 570, 0, 0); 				//special
+		Property p37 = new Property("Park Place","", 940, 650, 350, 38);
+		Property p38 = new Property("Luxury Tax","", 940, 730, 0, -100);		//special
+		Property p39 = new Property("Boardwalk","", 940, 810, 400, 50);
 	
+		Property[] properties = {p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, 
+				p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38, p39};
+		
+		public int dice() {
+			 int diceX=(int)(Math.random()*6+1); //a
+		  	 int diceY=(int)(Math.random()*6+1); 
+		  	 return diceX + diceY; 
+		  	 
+		  	 
+		}
+		
+		
 	
-	
-
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		bg.paint(g);
+		player0.paint(g);
+		player1.paint(g);
+		//player2.paint(g);
+		
+		if(turn == 0) { 
+			player0.setX(properties[dice()].getX());
+			player0.setX(properties[dice()].getY());
+		}
+		
+		
+		
 	}
 
 	private Image getImage(String string) {
@@ -88,6 +112,9 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	}
 
 	public static void main(String[] arg) {
+		
+		
+		
 		Board f = new Board();
 	}
 
@@ -107,9 +134,12 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		t.start();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
-
+		
 	}
 
+	
+	
+	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		if (MouseEvent.MOUSE_CLICKED == 500) {
@@ -148,9 +178,11 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		// System.out.println(arg0.getKeyCode()); //Player movement
-		if (arg0.getKeyCode() == 38) {
-
-		}
+		
+			
+			
+			
+		
 	}
 
 	@Override
@@ -164,5 +196,6 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		// TODO Auto-generated method stub
 
 	}
+	
 
 }
