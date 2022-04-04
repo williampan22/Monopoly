@@ -29,7 +29,7 @@ public class Player {
 			tx = AffineTransform.getTranslateInstance(x, y );
 			init(x, y); 				//initialize the location of the image
 			
-			//use your variables
+			//use your variabless
 	}
 
 		public void paint(Graphics g) {

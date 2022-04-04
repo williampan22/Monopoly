@@ -1,5 +1,5 @@
 
-public class Property { //a
+public class Property { //aa
 	
 	private String name;
 	private int x; 

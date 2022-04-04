@@ -21,7 +21,7 @@ import javax.swing.Timer;
 
 public class Board extends JPanel implements ActionListener, MouseListener, KeyListener {
 
-	Background bg = new Background(0, 0); //aa
+	Background bg = new Background(0, 0); //aaa
 	Player player0 = new Player(0, "Car.png"); 
 	Player player1 = new Player(1, "Dog.png"); 
 	Player player2 = new Player(2, "Hat.png"); 
