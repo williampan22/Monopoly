@@ -23,7 +23,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 
 	Background bg = new Background(0, 0); //aaas
 	Player player0 = new Player(0, 0, "Car.png", 53, 39); 
-	Player player1 = new Player(1, 0, "Dog.png", 0, 0); 
+	Player player1 = new Player(1, 0, "Dog.png", 48, 32); 
 	Player player2 = new Player(2, 0, "Hat.png", 0, 0); 
 	int turn = 0; 
 	int numPlayers = 2; 
@@ -82,6 +82,8 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		Property[] properties = {p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, 
 				p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38, p39};
 		
+		Player[] players = { player0, player1, player2}; 
+		
 		public int dice() {
 			 int diceX=(int)(Math.random()*6+1); //a
 		  	 int diceY=(int)(Math.random()*6+1); 
@@ -89,21 +91,25 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		}
 		
 		public void roll() { 
-			player0.setPos( player0.getPos() + dice() );
-			player0.setX(properties[player0.getPos()].getX() - player0.getWidth() / 2 );
-			player0.setY(properties[player0.getPos()].getY());
-			System.out.println("Name " + properties[player0.getPos()].getName());
+			players[turn].setPos( players[turn].getPos() + dice() );
+			players[turn].setX(properties[players[turn].getPos()].getX() - players[turn].getWidth() / 2 );
+			players[turn].setY(properties[players[turn].getPos()].getY());
+			//System.out.println("Name " + properties[players[turn].getPos()].getName());
 			turn++;
+			System.out.println(turn);
 		}
 		
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		bg.paint(g);
-		
 		player0.paint(g);
 		player1.paint(g);
-		//player2.paint(g)s;
+		//player2.paint(g);
+		
+		if(turn >= numPlayers) { 
+			turn = 0; 
+		}
 		
 	}
 
@@ -178,7 +184,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stubs
-		 System.out.println(arg0.getKeyCode()); 
+		 //System.out.println(arg0.getKeyCode()); 
 		
 		 if (arg0.getKeyCode() == 82) { 
 				roll();
