@@ -22,25 +22,27 @@ import javax.swing.Timer;
 public class Board extends JPanel implements ActionListener, MouseListener, KeyListener {
 
 	Background bg = new Background(0, 0); //aaa
-	Player player0 = new Player(0, "Car.png"); 
-	Player player1 = new Player(1, "Dog.png"); 
-	Player player2 = new Player(2, "Hat.png"); 
-	 int turn = 0; 
+	Player player0 = new Player(0, 0, "Car.png", 53, 39); 
+	Player player1 = new Player(1, 0, "Dog.png", 0, 0); 
+	Player player2 = new Player(2, 0, "Hat.png", 0, 0); 
+	int turn = 0; 
+	int numPlayers = 2; 
+	boolean roll = false; 
 	
-	// CREATE THE OBJECT (STEP 1)
+	// CREATE THE OBJECT (STEP 1)s
 	Random rnd = new Random();
 	//https://www.falstad.com/monopoly.html
 		Property p0 = new Property("Go","", 930, 920, 0, -200);					//special
 		Property p1 = new Property("Mediterranean Avenue","", 825 , 930 , 60, 2);
 		Property p2 = new Property("Community Chest","", 740 , 930 , 0, 0); 		//special - x diff is 85
-		Property p3 = new Property("Baltic Avenue","", 655 , 930, 60, 4);
+		Property p3 = new Property("Baltic Avenue","", 660 , 930, 60, 4);
 		Property p4 = new Property("Income Tax","", 580, 930, 0, 200);			//special
-		Property p5 = new Property("Reading Railroad","", 505 , 930, 200, 25); 	//special
-		Property p6 = new Property("Oriental Avenue","", 430 , 930, 100, 6);
-		Property p7 = new Property("Chance","", 355, 930, 0, 0); 				//special
-		Property p8 = new Property("Vermont Avenue","", 280 , 930, 100, 6);
-		Property p9 = new Property("Connecticut Avenue","", 205, 930, 100, 8);
-		Property p10 = new Property("VISITING JAIL","", 12, 890, 0, 0);		//special
+		Property p5 = new Property("Reading Railroad","", 500 , 930, 200, 25); 	//special
+		Property p6 = new Property("Oriental Avenue","", 416 , 930, 100, 6);
+		Property p7 = new Property("Chance","", 335, 930, 0, 0); 				//special
+		Property p8 = new Property("Vermont Avenue","", 250 , 930, 100, 6);
+		Property p9 = new Property("Connecticut Avenue","", 167, 930, 100, 8);
+		Property p10 = new Property("VISITING JAIL","", 0, 890, 0, 0);		//special
 		
 		
 		Property p11 = new Property("St. Charles Place","", 55, 820, 140, 10);
@@ -84,25 +86,24 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 			 int diceX=(int)(Math.random()*6+1); //a
 		  	 int diceY=(int)(Math.random()*6+1); 
 		  	 return diceX + diceY; 
-		  	 
-		  	 
 		}
 		
+		public void roll() { 
+			player0.setPos( player0.getPos() + dice() );
+			player0.setX(properties[player0.getPos()].getX() - player0.getWidth() / 2 );
+			player0.setY(properties[player0.getPos()].getY());
+			System.out.println("Name " + properties[player0.getPos()].getName());
+			turn++;
+		}
 		
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		bg.paint(g);
+		
 		player0.paint(g);
 		player1.paint(g);
-		//player2.paint(g);
-		
-		if(turn == 0) { 
-			player0.setX(properties[dice()].getX());
-			player0.setX(properties[dice()].getY());
-		}
-		
-		
+		//player2.paint(g)s;
 		
 	}
 
@@ -176,10 +177,12 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		// System.out.println(arg0.getKeyCode()); //Player movement
+		// TODO Auto-generated method stubs
+		 System.out.println(arg0.getKeyCode()); 
 		
-			
+		 if (arg0.getKeyCode() == 82) { 
+				roll();
+			 }
 			
 			
 		
@@ -194,7 +197,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-
+		
 	}
 	
 

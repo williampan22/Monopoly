@@ -15,18 +15,22 @@ public class Player {
 	String avatar;  
 	int money = 1500;
 	ArrayList<Integer> propertiesOwned = new ArrayList<Integer>();
-	int x;
-	int y;
+	int x = 870; 
+	int y = 900;
 	private Image img; 	
 	private AffineTransform tx;
+	int width; 
+	int height;
 	
-	public Player(int playerNumber, String avatar) {
+	public Player(int playerNumber, int pos, String avatar, int width, int height) {
 		this.playerNumber = playerNumber;
 		this.avatar = avatar;
-			x = 870; 
-			y = 900; 
-			img = getImage("/imgs/" + avatar); //load the image for Tree
+			 
+			img = getImage("/imgs/" + avatar); //load the image for Treess
 			tx = AffineTransform.getTranslateInstance(x, y );
+			this.pos = pos;
+			this.width = width; 
+			this.height = height;
 			init(x, y); 				//initialize the location of the image
 			
 			//use your variabless
@@ -51,7 +55,8 @@ public class Player {
 		/* update the picture variable location */
 		private void update() {
 
-			
+			tx.setToTranslation(x, y);
+			tx.scale(0.3, 0.3);
 			
 		}
 		
@@ -70,14 +75,6 @@ public class Player {
 			}
 			return tempImage;
 		}
-
-	
-
-	
-	
-	
-	
-	
 
 	public int getPos() {
 		return pos;
@@ -135,7 +132,21 @@ public class Player {
 		this.y = y;
 	}
 	
-	
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
 	
 	
 	
