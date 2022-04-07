@@ -29,7 +29,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	int numPlayers = 2; 
 	boolean roll = false; 
 	
-	// CREATE THE OBJECT (STEP 1)s
+	// CREATE THE OBJECT (STEP 1)ss
 	Random rnd = new Random();
 	//https://www.falstad.com/monopoly.html
 		Property p0 = new Property("Go","", 930, 920, 0, -200);					//special
