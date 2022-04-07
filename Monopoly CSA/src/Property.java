@@ -1,5 +1,5 @@
 
-public class Property { //aas
+public class Property { //aass
 	
 	private String name;
 	private int x; 

@@ -9,7 +9,7 @@ import java.net.URL;
 
 public class Background{
 	
-	//add location attributesasas
+	//add location attributesasass
 	private Image img; 	
 	private AffineTransform tx;
 
