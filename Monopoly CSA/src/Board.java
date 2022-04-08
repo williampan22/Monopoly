@@ -1,8 +1,10 @@
 
+import java.awt.BasicStroke;
 import java.awt.Color; 
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -102,6 +104,17 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
+		
+		  Graphics2D g2 = (Graphics2D) g;
+			
+			
+		  
+		    g2.setStroke(new BasicStroke(10));
+		     //thick
+		    g.setColor(Color.BLACK);
+			g.drawRect(1000, 0, 550, 992);
+			g.fillRect(1540,0,15,1035);
+			
 		bg.paint(g);
 		player0.paint(g);
 		player1.paint(g);
@@ -116,6 +129,82 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 				players[i].setPos(players[i].getPos() - 39 ); 
 			}
 		}
+		
+		if(turn == 0) {
+			g.setColor(Color.BLUE);
+			}
+			
+			g.drawRect(1010, 10, 525, 972);
+			players[0].paint(g);
+			players[1].paint(g);
+			//player2.paint(g);
+			
+			g.setColor(Color.BLACK);
+			g2.setStroke(new BasicStroke(5));
+			g.drawRect(1030, 30, 100, 60);
+			g.setFont(new Font("Times New Roman", Font.BOLD, 40));
+			g.drawString("Buy", 1045, 70);
+			
+			g.drawRect(1150, 30, 100, 60);
+			g.drawString("Roll", 1165, 70);
+			
+			
+			g2.setStroke(new BasicStroke(10));
+			
+			if(turn == 0) { 
+				players[0].setX(properties[dice()].getX());
+				players[0].setX(properties[dice()].getY());
+				
+				
+				
+			}
+			
+			g.setFont(new Font("Times New Roman", Font.BOLD, 20));
+			
+			
+			for(int i = 0; i < players.length; i++) {
+				g.drawLine(1550, i*1000/players.length, 1900, i*1000/players.length);
+
+				
+			//	g.fillRect(1550, i*1000/players.length-1000/players.length, 400, 1000/players.length);
+				
+				if(i == 0) {
+					g.setColor(Color.BLUE);
+					g.drawRect(1550, i*1000/players.length, 400, 1000/players.length);
+					g.setColor(Color.BLACK);
+					g.drawString("Money: " + players[0].getMoney(), 1560, i*1000/players.length+20);
+					for(int j = 0; j < players[i].getPropertiesOwned().size(); j++) {
+						g.drawString(properties[players[i].getPropertiesOwned().get(j)].getName(), 1560, i*1000/players.length+40+20*j);
+					}
+				}
+				if(i == 1) {
+					g.setColor(Color.GREEN);
+					g.drawRect(1550, i*1000/players.length, 400, 1000/players.length);
+					g.setColor(Color.BLACK);
+					g.drawString("Money: " + players[0].getMoney(), 1560, i*1000/players.length+20);
+					for(int j = 0; j < players[i].getPropertiesOwned().size(); j++) {
+						g.drawString(properties[players[i].getPropertiesOwned().get(j)].getName(), 1560, i*1000/players.length+40+20*j);
+					}
+				}
+				if(i == 2) {
+					g.setColor(Color.ORANGE);
+					g.drawRect(1550, i*1000/players.length, 400, 1000/players.length);
+					g.setColor(Color.BLACK);
+					g.drawString("Money: " + players[0].getMoney(), 1560, i*1000/players.length+20);
+					for(int j = 0; j < players[i].getPropertiesOwned().size(); j++) {
+						g.drawString(properties[players[i].getPropertiesOwned().get(j)].getName(), 1560, i*1000/players.length+40+20*j);
+					}
+				}
+				if(i == 3) {
+					g.setColor(Color.RED);
+					g.drawRect(1550, i*1000/players.length, 400, 1000/players.length);
+					g.setColor(Color.BLACK);
+					g.drawString("Money: " + players[0].getMoney(), 1560, i*1000/players.length+20);
+					for(int j = 0; j < players[i].getPropertiesOwned().size(); j++) {
+						g.drawString(properties[players[i].getPropertiesOwned().get(j)].getName(), 1560, i*1000/players.length+40+20*j);
+					}
+				}
+			}
 		
 	}
 
