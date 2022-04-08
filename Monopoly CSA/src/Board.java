@@ -246,8 +246,10 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		if (MouseEvent.MOUSE_CLICKED == 500) {
-			System.out.println(getMousePosition());
+		int mx = (int) arg0.getX(); 
+		int my = (int) arg0.getY(); 
+		if(mx > 1150 & mx < 1250 && my > 30 && my < 90) { 
+			roll();
 		}
 	}
 
