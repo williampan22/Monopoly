@@ -133,6 +133,9 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		if(turn == 0) {
 			g.setColor(Color.BLUE);
 			}
+		if(turn == 1) {
+			g.setColor(Color.GREEN);
+			}
 			
 			g.drawRect(1010, 10, 525, 972);
 			players[0].paint(g);
@@ -151,13 +154,6 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 			
 			g2.setStroke(new BasicStroke(10));
 			
-			if(turn == 0) { 
-				players[0].setX(properties[dice()].getX());
-				players[0].setX(properties[dice()].getY());
-				
-				
-				
-			}
 			
 			g.setFont(new Font("Times New Roman", Font.BOLD, 20));
 			
