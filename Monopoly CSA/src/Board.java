@@ -111,6 +111,12 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 			turn = 0; 
 		}
 		
+		for(int i = 0; i < players.length; i++) { 
+			if(players[i].getPos() > 40) { 
+				players[i].setPos(players[i].getPos() - 39 ); 
+			}
+		}
+		
 	}
 
 	private Image getImage(String string) {
