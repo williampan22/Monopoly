@@ -115,7 +115,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		g2.setStroke(new BasicStroke(10));
 		// thick
 		g.setColor(Color.BLACK);
-		g.setFont(new Font("Times New Roman", Font.BOLD, 40));
+		g.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		g.drawRect(1000, 0, 550, 992);
 		g.fillRect(1540, 0, 15, 1035);
 
@@ -123,8 +123,65 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		player0.paint(g);
 		player1.paint(g);
 		// player2.paint(g);
+		g.drawString("Player " + turn + "'s Turn", 1045, 150);
+		
+		if(players[turn].getPos() == 0 ) { 
+			
+			g.drawString("You are on GO!" , 1045, 200);
+			
+			}
+		
+		else if(players[turn].getPos() == 10 ) { 
+			
+			g.drawString("Visiting JAIL!" , 1045, 200);
+			
+			}
+		
+		else if(players[turn].getPos() == 20 ) { 
+			
+			g.drawString("ON FREE PARKING!" , 1045, 200);
+			
+			}
+		
+		else if(players[turn].getPos() == 30 ) { 
+			
+			g.drawString("Going to JAIL!" , 1045, 200);
+			
+			}
+		
+		else if(players[turn].getPos() == 7 || players[turn].getPos() == 22 || players[turn].getPos() == 36) { 
+			
+			g.drawString("Landed on Chance! Draw a Card!" , 1045, 200);
+			
+			}
+		
+		
+		else if(players[turn].getPos() == 2 || players[turn].getPos() == 17 || players[turn].getPos() == 33) { 
+			
+			g.drawString("Landed on Community Chest! Draw a Card!" , 1045, 200);
+			
+			}
+		
+		else if(players[turn].getPos() == 2 || players[turn].getPos() == 17 || players[turn].getPos() == 33) { 
+				
+				g.drawString("Landed on Chance! Draw a Card!" , 1045, 200);
+				
+				}
+		
+		else if(players[turn].getPos() == 4) { 
+			
+			g.drawString("INCOME TAX! PAY $200!" , 1045, 200);
+			
+			}
+		
+		else if(players[turn].getPos() == 38) { 
+			
+			g.drawString("LUXURY TAX! PAY $100!" , 1045, 200);
+			
+			}
 
-		if(properties[players[turn].getPos()].getOwner() == "") { 
+		
+		else if(properties[players[turn].getPos()].getOwner() == "") { 
 			
 			g.drawString("Do You Want To Buy " + properties[players[turn].getPos()].getName() + "?", 1045, 200);
 			
