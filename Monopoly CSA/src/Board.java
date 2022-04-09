@@ -29,7 +29,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	Player player2 = new Player(2, 0, "Hat.png", 0, 0);
 	int turn = 0;
 	int numPlayers = 2;
-	boolean roll = false;
+	boolean rollYet = false; 
 
 	// CREATE THE OBJECT (STEP 1)ssss
 	Random rnd = new Random();
@@ -98,12 +98,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 
 		players[turn].setX(properties[players[turn].getPos()].getX() - players[turn].getWidth() / 2);
 		players[turn].setY(properties[players[turn].getPos()].getY());
-		// System.out.println("Name " + properties[players[turn].getPos()].getName());
-		//turn++;
-
-//			if(properties[players[turn].getPos()].getOwner() == "") { 
-//				g.drawString("Do You Want To Buy " + properties[players[turn].getPos()].getName(), 1165, 70);
-//			}
+		rollYet = true;
 
 	}
 
@@ -125,66 +120,61 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		// player2.paint(g);
 		g.drawString("Player " + turn + "'s Turn", 1045, 150);
 		
-		if(players[turn].getPos() == 0 ) { 
+		if(players[turn].getPos() == 0 && rollYet) { 
 			
 			g.drawString("You are on GO!" , 1045, 200);
 			
 			}
 		
-		else if(players[turn].getPos() == 10 ) { 
+		else if(players[turn].getPos() == 10 && rollYet ) { 
 			
 			g.drawString("Visiting JAIL!" , 1045, 200);
 			
 			}
 		
-		else if(players[turn].getPos() == 20 ) { 
+		else if(players[turn].getPos() == 20  && rollYet) { 
 			
 			g.drawString("ON FREE PARKING!" , 1045, 200);
 			
 			}
 		
-		else if(players[turn].getPos() == 30 ) { 
+		else if(players[turn].getPos() == 30 && rollYet) { 
 			
 			g.drawString("Going to JAIL!" , 1045, 200);
 			
 			}
 		
-		else if(players[turn].getPos() == 7 || players[turn].getPos() == 22 || players[turn].getPos() == 36) { 
+		else if(players[turn].getPos() == 7 || players[turn].getPos() == 22 || players[turn].getPos() == 36 && rollYet) { 
 			
 			g.drawString("Landed on Chance! Draw a Card!" , 1045, 200);
 			
 			}
 		
 		
-		else if(players[turn].getPos() == 2 || players[turn].getPos() == 17 || players[turn].getPos() == 33) { 
+		else if(players[turn].getPos() == 2 || players[turn].getPos() == 17 || players[turn].getPos() == 33 && rollYet) { 
 			
 			g.drawString("Landed on Community Chest! Draw a Card!" , 1045, 200);
 			
 			}
 		
-		else if(players[turn].getPos() == 2 || players[turn].getPos() == 17 || players[turn].getPos() == 33) { 
-				
-				g.drawString("Landed on Chance! Draw a Card!" , 1045, 200);
-				
-				}
 		
-		else if(players[turn].getPos() == 4) { 
+		else if(players[turn].getPos() == 4 && rollYet) { 
 			
 			g.drawString("INCOME TAX! PAY $200!" , 1045, 200);
 			
 			}
 		
-		else if(players[turn].getPos() == 38) { 
+		else if(players[turn].getPos() == 38 && rollYet) { 
 			
 			g.drawString("LUXURY TAX! PAY $100!" , 1045, 200);
 			
 			}
 
 		
-		else if(properties[players[turn].getPos()].getOwner() == "") { 
+		else if(properties[players[turn].getPos()].getOwner() == "" && rollYet) { 
 			
 			g.drawString("Do You Want To Buy " + properties[players[turn].getPos()].getName() + "?", 1045, 200);
-			
+			g.drawString("It Will Cost $" + properties[players[turn].getPos()].getPrice(), 1045, 250);
 			}	
 		
 		
@@ -192,7 +182,13 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 			turn = 0;
 		}
 
+		if(rollYet) { 
+			g.drawString("Rolled! End Turn!" , 1045, 300);
+		}
 		
+		if(!rollYet) { 
+			g.drawString("Player " + turn + "!Roll!", 1045, 300);
+		}
 		
 		//UI CODDE
 		
@@ -342,11 +338,12 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		// TODO Auto-generated method stubs
 		 System.out.println(arg0.getKeyCode());
 
-		if (arg0.getKeyCode() == 82) {
+		if (arg0.getKeyCode() == 82 && rollYet == false) {
 			roll();
 		}
 		if (arg0.getKeyCode() == 84) {
 			turn++;
+			rollYet = false; 
 		}
 
 	}
