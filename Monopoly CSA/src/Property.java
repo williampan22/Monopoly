@@ -4,11 +4,11 @@ public class Property { //aass
 	private String name;
 	private int x; 
 	private int y; 
-	private String owner; 
+	private int owner; 
 	private int price; //price to buy propertyssss
 	private int pay;  //price you pay when you land on property
 	
-	public Property(String name, String owner, int x, int y, int price, int pay) { 
+	public Property(String name, int owner, int x, int y, int price, int pay) { 
 		this.name =  name; 
 		this.x = x; 
 		this.y = y; 
@@ -60,14 +60,14 @@ public class Property { //aass
 
 
 
-	public String getOwner() {
+	public int getOwner() {
 		return owner;
 	}
 
 
 
 
-	public void setOwner(String owner) {
+	public void setOwner(int owner) {
 		this.owner = owner;
 	}
 
