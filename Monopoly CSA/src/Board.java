@@ -23,20 +23,23 @@ import javax.swing.Timer;
 
 public class Board extends JPanel implements ActionListener, MouseListener, KeyListener {
 
-	Background bg = new Background(0, 0); // aaasa
+	Background bg = new Background(0, 0); // aaasaa
 	Player player0 = new Player(0, 0, "Car.png", 53, 39);
 	Player player1 = new Player(1, 0, "Dog.png", 48, 32);
 	Player player2 = new Player(2, 0, "Hat.png", 0, 0);
 	int turn = 0;
 	int numPlayers = 2;
-	boolean rollYet = false; 
-	boolean didBuy = false; 
-	boolean haveToPay = false; 
+	boolean rollYet = false;
+	boolean didBuy = false;
+	boolean haveToPay = false;
+	boolean enoughMoney = false;
+	int dice1;
+	int dice2;
 
 	// CREATE THE OBJECT (STEP 1)ssss
 	Random rnd = new Random();
 	// https://www.falstad.com/monopoly.html
-	Property p0 = new Property("Go", -1 , 930, 920, 0, -200); // special
+	Property p0 = new Property("Go", -1, 930, 920, 0, -200); // special
 	Property p1 = new Property("Mediterranean Avenue", -1, 825, 930, 60, 2);
 	Property p2 = new Property("Community Chest", -1, 740, 930, 0, 0); // special - x diff is 85
 	Property p3 = new Property("Baltic Avenue", -1, 660, 930, 60, 4);
@@ -86,9 +89,11 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	Player[] players = { player0, player1, player2 };
 
 	public int dice() {
-		int diceX = (int) (Math.random() * 6 + 1); // a
-		int diceY = (int) (Math.random() * 6 + 1);
-		return diceX + diceY;
+		int dice1 = (int) (Math.random() * 6 + 1); // a
+		int dice2 = (int) (Math.random() * 6 + 1);
+		this.dice1 = dice1;
+		this.dice2 = dice2;
+		return dice1 + dice2;
 	}
 
 	public void roll() {
@@ -101,28 +106,45 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		players[turn].setX(properties[players[turn].getPos()].getX() - players[turn].getWidth() / 2);
 		players[turn].setY(properties[players[turn].getPos()].getY());
 		rollYet = true;
-		didBuy = false; 
-		haveToPay = false; 
-		
-		if(properties[players[turn].getPos()].getOwner() != -1 ) { 
-			haveToPay = true; 
+		didBuy = false;
+		haveToPay = false;
+
+		if (properties[players[turn].getPos()].getOwner() != -1) {
+			haveToPay = true;
 		}
-		
+
 	}
-	
-	public void buy() { 
-		if(players[turn].getPos() != 0 && players[turn].getPos() != 2 && players[turn].getPos() != 4 && 
-				players[turn].getPos() != 7 && players[turn].getPos() != 10 && players[turn].getPos() != 17 && players[turn].getPos() != 20 
-				&& players[turn].getPos() != 22 && players[turn].getPos() != 30 && players[turn].getPos() != 33 && players[turn].getPos() != 36 
-				&& players[turn].getPos() != 38 && properties[players[turn].getPos()].getOwner() == -1 ) {
-			
-			
-		players[turn].propertiesOwned.add(players[turn].getPos());
-		properties[players[turn].getPos()].setOwner(turn);
-		players[turn].setMoney(players[turn].getMoney() - properties[players[turn].getPos()].getPrice() );
-		didBuy = true; 
-		
+
+	public void buy() {
+		if (players[turn].getPos() != 0 && players[turn].getPos() != 2 && players[turn].getPos() != 4
+				&& players[turn].getPos() != 7 && players[turn].getPos() != 10 && players[turn].getPos() != 17
+				&& players[turn].getPos() != 20 && players[turn].getPos() != 22 && players[turn].getPos() != 30
+				&& players[turn].getPos() != 33 && players[turn].getPos() != 36 && players[turn].getPos() != 38
+				&& properties[players[turn].getPos()].getOwner() == -1) {
+
+			if ((players[turn].getMoney() >= properties[players[turn].getPos()].getPrice())) {
+
+				players[turn].setMoney(players[turn].getMoney() - properties[players[turn].getPos()].getPrice());
+				players[turn].propertiesOwned.add(players[turn].getPos());
+				properties[players[turn].getPos()].setOwner(turn);
+				enoughMoney = true;
+
+			} else {
+				enoughMoney = false;
+			}
+
+			didBuy = true;
+
 		}
+	}
+
+	public void pay() {
+
+		
+//		(haveToPay && turn != properties[players[turn].getPos()].getOwner()) {
+//			g.drawString("Player " + turn + " Landed On " + properties[players[turn].getPos()].getName()
+//					+ " And Has to Pay Player " + properties[players[turn].getPos()].getOwner() + " For $"
+//					+ properties[players[turn].getPos()].getPay() + "!", 1045, 250);
 	}
 
 	public void paint(Graphics g) {
@@ -141,114 +163,133 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		player0.paint(g);
 		player1.paint(g);
 		// player2.paint(g);
-		
-		g.setFont(new Font("Times New Roman", Font.BOLD, 50));
-		
-		g.drawString("Player " + turn + "'s Turn", 1045, 150);
-		
-		g.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		
-		if(players[turn].getPos() == 0 && rollYet) { 
-			
-			g.drawString("You are on GO!" , 1045, 200);
-			
-			}
-		
-		else if(players[turn].getPos() == 10 && rollYet ) { 
-			
-			g.drawString("Visiting JAIL!" , 1045, 200);
-			
-			}
-		
-		else if(players[turn].getPos() == 20  && rollYet) { 
-			
-			g.drawString("ON FREE PARKING!" , 1045, 200);
-			
-			}
-		
-		else if(players[turn].getPos() == 30 && rollYet) { 
-			
-			g.drawString("Going to JAIL!" , 1045, 200);
-			
-			}
-		
-		else if((players[turn].getPos() == 7 || players[turn].getPos() == 22 || players[turn].getPos() == 36) && rollYet) { 
-			
-			g.drawString("Landed on Chance! Draw a Card!" , 1045, 200);
-			
-			}
-		
-		
-		else if(players[turn].getPos() == 2 || players[turn].getPos() == 17 || players[turn].getPos() == 33 && rollYet) { 
-			
-			g.drawString("Landed on Community Chest! Draw a Card!" , 1045, 200);
-			
-			}
-		
-		
-		else if(players[turn].getPos() == 4 && rollYet) { 
-			
-			g.drawString("INCOME TAX! PAY $200!" , 1045, 200);
-			
-			}
-		
-		else if(players[turn].getPos() == 38 && rollYet) { 
-			
-			g.drawString("LUXURY TAX! PAY $100!" , 1045, 200);
-			
-			}
 
-		
-		else if(properties[players[turn].getPos()].getOwner() == -1 && rollYet) { 
-			
-			g.drawString("Do You Want To Buy " + properties[players[turn].getPos()].getName() + "?", 1045, 200);
+		g.setFont(new Font("Times New Roman", Font.BOLD, 50));
+
+		g.drawString("Player " + turn + "'s Turn", 1045, 150);
+
+		g.setFont(new Font("Times New Roman", Font.BOLD, 20));
+
+		if (rollYet) {
+			g.drawString("Dice 1: " + dice1, 1045, 180); // dice
+			g.drawString("Dice 2: " + dice2, 1150, 180);
+			g.drawString("Total Distance: " + (dice1 + dice2), 1250, 180);
+		}
+
+		if (players[turn].getPos() == 0 && rollYet) {
+
+			g.drawString("You are on GO!", 1045, 200);
+
+		}
+
+		else if (players[turn].getPos() == 10 && rollYet) {
+
+			g.drawString("Visiting JAIL!", 1045, 200);
+
+		}
+
+		else if (players[turn].getPos() == 20 && rollYet) {
+
+			g.drawString("ON FREE PARKING!", 1045, 200);
+
+		}
+
+		else if (players[turn].getPos() == 30 && rollYet) {
+
+			g.drawString("Going to JAIL!", 1045, 200);
+
+		}
+
+		else if ((players[turn].getPos() == 7 || players[turn].getPos() == 22 || players[turn].getPos() == 36)
+				&& rollYet) {
+
+			g.drawString("Landed on Chance! Draw a Card!", 1045, 200);
+
+		}
+
+		else if ((players[turn].getPos() == 2 || players[turn].getPos() == 17 || players[turn].getPos() == 33)
+				&& rollYet) {
+
+			g.drawString("Landed on Community Chest! Draw a Card!", 1045, 200);
+
+		}
+
+		else if (players[turn].getPos() == 4 && rollYet) {
+
+			g.drawString("INCOME TAX! PAY $200!", 1045, 200);
+
+		}
+
+		else if (players[turn].getPos() == 38 && rollYet) {
+
+			g.drawString("LUXURY TAX! PAY $100!", 1045, 200);
+
+		}
+
+		else if (!didBuy && rollYet && properties[players[turn].getPos()].getOwner() == turn) {
+
+			g.setFont(new Font("Times New Roman", Font.BOLD, 40));
+			g.drawString("Player " + turn + " Landed On His Own Property, "
+					+ properties[players[turn].getPos()].getName() + "!", 1045, 225);
+
+		}
+
+		else if (properties[players[turn].getPos()].getOwner() == -1 && rollYet) {
+
+			g.drawString("Do You Want To Buy " + properties[players[turn].getPos()].getName() + "?", 1045, 225);
 			g.drawString("It Will Cost $" + properties[players[turn].getPos()].getPrice(), 1045, 250);
-			}	
-		
-		
+		}
+
 		if (turn >= numPlayers) {
 			turn = 0;
 		}
 
-		if(rollYet) { 
-			g.drawString("Rolled! End Turn!" , 1045, 300);
+		if (rollYet) {
+			g.drawString("Rolled! End Turn!", 1045, 450);
 		}
-		
-		if(!rollYet) { 
+
+		if (!rollYet) {
 			g.drawString("Player " + turn + "!Roll!", 1045, 200);
 		}
-		
-		for(int i = 0; i < properties.length; i++) { 
-			if(properties[i].getOwner() == 0 ) { 
+
+		for (int i = 0; i < properties.length; i++) {
+			if (properties[i].getOwner() == 0) {
 				g.setColor(Color.BLUE);
 				g.drawRect(properties[i].getX(), properties[i].getY() + 10, 5, 5);
 			}
-			if(properties[i].getOwner() == 1 ) { 
+			if (properties[i].getOwner() == 1) {
 				g.setColor(Color.GREEN);
 				g.drawRect(properties[i].getX(), properties[i].getY() + 10, 5, 5);
 			}
-			if(properties[i].getOwner() == 2 ) { 
+			if (properties[i].getOwner() == 2) {
 				g.setColor(Color.ORANGE);
 				g.drawRect(properties[i].getX(), properties[i].getY() + 10, 5, 5);
 			}
 		}
-		
-		
-		//UI CODDE
-		
-		
-		if(didBuy && rollYet ) { 
-			g.drawString("Player " + turn + " Bought " + properties[players[turn].getPos()].getName() + 
-					" For $" + properties[players[turn].getPos()].getPrice() + "!" , 1045, 250);
+
+		// UI CODDE
+
+		if (didBuy && rollYet) {
+
+			if (enoughMoney) {
+				g.drawString("Player " + turn + " Bought " + properties[players[turn].getPos()].getName() + " For $"
+						+ properties[players[turn].getPos()].getPrice() + "!", 1045, 250);
+			} else {
+				g.drawString("Player " + turn + " CANNOT BUY " + properties[players[turn].getPos()].getName() + " For $"
+						+ properties[players[turn].getPos()].getPrice() + "!", 1045, 300);
+				g.drawString("NOT ENOUGH MONEY!!", 1045, 350);
+			}
+
 		}
-		
+
 		g.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		
-		if(haveToPay && turn != properties[players[turn].getPos()].getOwner() ) { 
-			g.drawString("Player " + turn + " Landed On " + properties[players[turn].getPos()].getName() + 
-					" And Has to Pay Player " + properties[players[turn].getPos()].getOwner() + " For $" + properties[players[turn].getPos()].getPay() + "!" , 1045, 250);
+
+		if (haveToPay && turn != properties[players[turn].getPos()].getOwner()) {
+			g.drawString("Player " + turn + " Landed On " + properties[players[turn].getPos()].getName()
+					+ " And Has to Pay Player " + properties[players[turn].getPos()].getOwner() + " For $"
+					+ properties[players[turn].getPos()].getPay() + "!", 1045, 250);
 		}
-		
+
 		if (turn == 0) {
 			g.setColor(Color.BLUE);
 		}
@@ -266,7 +307,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 
 		g.drawRect(1150, 30, 100, 60);
 		g.drawString("Roll", 1165, 70);
-		
+
 		g.drawRect(1270, 30, 185, 60);
 		g.drawString("End Turn", 1280, 70);
 
@@ -285,9 +326,10 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 				g.drawRect(1550, i * 1000 / players.length, 400, 1000 / players.length);
 				g.setColor(Color.BLACK);
 				g.drawString("Money: " + players[i].getMoney(), 1560, i * 1000 / players.length + 20);
-				g.drawString("Position: " + properties[players[i].getPos()].getName(), 1560, i * 1000 / players.length + 20 + 30) ;
-				g.drawString("Properties Owned:" , 1560, i * 1000 / players.length + 20 + 30 + 30 ) ;
-			
+				g.drawString("Position: " + properties[players[i].getPos()].getName(), 1560,
+						i * 1000 / players.length + 20 + 30);
+				g.drawString("Properties Owned:", 1560, i * 1000 / players.length + 20 + 30 + 30);
+
 				for (int j = 0; j < players[i].getPropertiesOwned().size(); j++) {
 					g.drawString(properties[players[i].getPropertiesOwned().get(j)].getName(), 1560,
 							i * 1000 / players.length + 100 + 20 * j);
@@ -298,9 +340,10 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 				g.drawRect(1550, i * 1000 / players.length, 400, 1000 / players.length);
 				g.setColor(Color.BLACK);
 				g.drawString("Money: " + players[i].getMoney(), 1560, i * 1000 / players.length + 20);
-				g.drawString("Position: " + properties[players[i].getPos()].getName(), 1560, i * 1000 / players.length + 20 + 30) ;
-				g.drawString("Properties Owned:" , 1560, i * 1000 / players.length + 20 + 30 + 30 ) ;
-				
+				g.drawString("Position: " + properties[players[i].getPos()].getName(), 1560,
+						i * 1000 / players.length + 20 + 30);
+				g.drawString("Properties Owned:", 1560, i * 1000 / players.length + 20 + 30 + 30);
+
 				for (int j = 0; j < players[i].getPropertiesOwned().size(); j++) {
 					g.drawString(properties[players[i].getPropertiesOwned().get(j)].getName(), 1560,
 							i * 1000 / players.length + 100 + 20 * j);
@@ -321,7 +364,8 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 				g.drawRect(1550, i * 1000 / players.length, 400, 1000 / players.length);
 				g.setColor(Color.BLACK);
 				g.drawString("Money: " + players[0].getMoney(), 1560, i * 1000 / players.length + 20);
-				g.drawString("Position: " + properties[players[i].getPos()].getName(), 1560, i * 1000 / players.length + 20 + 30) ;
+				g.drawString("Position: " + properties[players[i].getPos()].getName(), 1560,
+						i * 1000 / players.length + 20 + 30);
 				for (int j = 0; j < players[i].getPropertiesOwned().size(); j++) {
 					g.drawString(properties[players[i].getPropertiesOwned().get(j)].getName(), 1560,
 							i * 1000 / players.length + 40 + 20 * j);
@@ -362,20 +406,20 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		int mx = (int) arg0.getX(); 
-		int my = (int) arg0.getY(); 
+		int mx = (int) arg0.getX();
+		int my = (int) arg0.getY();
 		System.out.println(mx + " " + my);
-		if(mx >= 1040 & mx <= 1140 && my >= 60 && my <= 118) { 
+		if (mx >= 1040 & mx <= 1140 && my >= 60 && my <= 118) {
 			buy();
 		}
-		
-		if(mx >= 1157 & mx <= 1257 && my >= 60 && my <= 118) { 
+
+		if (mx >= 1157 & mx <= 1257 && my >= 60 && my <= 118) {
 			roll();
 		}
-		
-		if(mx >= 1278 & mx <= 1460 && my >= 60 && my <= 118) { 
+
+		if (mx >= 1278 & mx <= 1460 && my >= 60 && my <= 118) {
 			turn++;
-			rollYet = false; 
+			rollYet = false;
 		}
 	}
 
@@ -409,14 +453,14 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stubs
-		 System.out.println(arg0.getKeyCode());
+		System.out.println(arg0.getKeyCode());
 
 		if (arg0.getKeyCode() == 82 && rollYet == false) {
 			roll();
 		}
 		if (arg0.getKeyCode() == 84) {
 			turn++;
-			rollYet = false; 
+			rollYet = false;
 		}
 		if (arg0.getKeyCode() == 66) {
 			buy();
