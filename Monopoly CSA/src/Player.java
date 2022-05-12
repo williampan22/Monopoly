@@ -26,7 +26,7 @@ public class Player {
 		this.playerNumber = playerNumber;
 		this.avatar = avatar;
 			 
-			img = getImage("/imgs/" + avatar); //load the image for Treesssss
+			img = getImage("/imgs/" + avatar); //load the image for Treessssss
 			tx = AffineTransform.getTranslateInstance(x, y );
 			this.pos = pos;
 			this.width = width; 
