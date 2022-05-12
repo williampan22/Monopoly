@@ -25,8 +25,7 @@ public class Player {
 	public Player(int playerNumber, int pos, String avatar, int width, int height) {
 		this.playerNumber = playerNumber;
 		this.avatar = avatar;
-			 
-			img = getImage("/imgs/" + avatar); //load the image for Treesssssss
+			img = getImage("/imgs/" + avatar); //load the image for Treessssssss
 			tx = AffineTransform.getTranslateInstance(x, y );
 			this.pos = pos;
 			this.width = width; 
