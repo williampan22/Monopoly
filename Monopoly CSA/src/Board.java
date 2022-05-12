@@ -141,7 +141,12 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		player0.paint(g);
 		player1.paint(g);
 		// player2.paint(g);
+		
+		g.setFont(new Font("Times New Roman", Font.BOLD, 50));
+		
 		g.drawString("Player " + turn + "'s Turn", 1045, 150);
+		
+		g.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		
 		if(players[turn].getPos() == 0 && rollYet) { 
 			
@@ -167,7 +172,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 			
 			}
 		
-		else if(players[turn].getPos() == 7 || players[turn].getPos() == 22 || players[turn].getPos() == 36 && rollYet) { 
+		else if((players[turn].getPos() == 7 || players[turn].getPos() == 22 || players[turn].getPos() == 36) && rollYet) { 
 			
 			g.drawString("Landed on Chance! Draw a Card!" , 1045, 200);
 			
@@ -210,7 +215,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		}
 		
 		if(!rollYet) { 
-			g.drawString("Player " + turn + "!Roll!", 1045, 300);
+			g.drawString("Player " + turn + "!Roll!", 1045, 200);
 		}
 		
 		for(int i = 0; i < properties.length; i++) { 
@@ -232,15 +237,16 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		//UI CODDE
 		
 		
-		if(didBuy) { 
+		if(didBuy && rollYet ) { 
 			g.drawString("Player " + turn + " Bought " + properties[players[turn].getPos()].getName() + 
 					" For $" + properties[players[turn].getPos()].getPrice() + "!" , 1045, 250);
 		}
 		
+		g.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		
-		if(haveToPay) { 
+		if(haveToPay && turn != properties[players[turn].getPos()].getOwner() ) { 
 			g.drawString("Player " + turn + " Landed On " + properties[players[turn].getPos()].getName() + 
-					" And Has to Pay Player " + properties[players[turn].getPos()].getOwner() + "For $" + properties[players[turn].getPos()].getPrice() + "!" , 1045, 250);
+					" And Has to Pay Player " + properties[players[turn].getPos()].getOwner() + " For $" + properties[players[turn].getPos()].getPay() + "!" , 1045, 250);
 		}
 		
 		if (turn == 0) {
@@ -260,6 +266,9 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 
 		g.drawRect(1150, 30, 100, 60);
 		g.drawString("Roll", 1165, 70);
+		
+		g.drawRect(1270, 30, 185, 60);
+		g.drawString("End Turn", 1280, 70);
 
 		g2.setStroke(new BasicStroke(10));
 
@@ -355,8 +364,18 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	public void mouseClicked(MouseEvent arg0) {
 		int mx = (int) arg0.getX(); 
 		int my = (int) arg0.getY(); 
-		if(mx > 1150 & mx < 1250 && my > 30 && my < 90) { 
+		System.out.println(mx + " " + my);
+		if(mx >= 1040 & mx <= 1140 && my >= 60 && my <= 118) { 
+			buy();
+		}
+		
+		if(mx >= 1157 & mx <= 1257 && my >= 60 && my <= 118) { 
 			roll();
+		}
+		
+		if(mx >= 1278 & mx <= 1460 && my >= 60 && my <= 118) { 
+			turn++;
+			rollYet = false; 
 		}
 	}
 
