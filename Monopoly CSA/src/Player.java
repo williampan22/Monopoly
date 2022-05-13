@@ -21,8 +21,10 @@ public class Player {
 	private AffineTransform tx;
 	int width; 
 	int height;
+	int numRailRoads; 
 	
-	public Player(int playerNumber, int pos, String avatar, int width, int height) {
+
+	public Player(int playerNumber, int pos, String avatar, int width, int height, int numRailRoads) {
 		this.playerNumber = playerNumber;
 		this.avatar = avatar;
 			img = getImage("/imgs/" + avatar); //load the image for Treessssssss
@@ -30,6 +32,7 @@ public class Player {
 			this.pos = pos;
 			this.width = width; 
 			this.height = height;
+			this.numRailRoads = 0; 
 			init(x, y); 				//initialize the location of the image
 			
 			//use your variabless
@@ -147,7 +150,13 @@ public class Player {
 		this.height = height;
 	}
 	
-	
+	public int getNumRailRoads() {
+		return numRailRoads;
+	}
+
+	public void setNumRailRoads(int numRailRoads) {
+		this.numRailRoads = numRailRoads;
+	}
 	
 	
 	

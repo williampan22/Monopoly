@@ -5,7 +5,7 @@ public class Property { //aass
 	private int x; 
 	private int y; 
 	private int owner; 
-	private int price; //price to buy propertysssssss
+	private int price; //price to buy propertyssssssss
 	private int pay;  //price you pay when you land on property
 	
 	public Property(String name, int owner, int x, int y, int price, int pay) { 

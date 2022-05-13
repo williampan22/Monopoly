@@ -24,15 +24,16 @@ import javax.swing.Timer;
 public class Board extends JPanel implements ActionListener, MouseListener, KeyListener {
 
 	Background bg = new Background(0, 0); // aaasaas
-	Player player0 = new Player(0, 0, "Car.png", 53, 39);
-	Player player1 = new Player(1, 0, "Dog.png", 48, 32);
-	Player player2 = new Player(2, 0, "Hat.png", 0, 0);
+	Player player0 = new Player(0, 0, "Car.png", 53, 39, 0 );
+	Player player1 = new Player(1, 0, "Dog.png", 48, 32, 0);
+	Player player2 = new Player(2, 0, "Hat.png", 0, 0, 0);
 	int turn = 0;
 	int numPlayers = 2;
 	boolean rollYet = false;
 	boolean didBuy = false;
 	boolean haveToPay = false;
 	boolean enoughMoney = false;
+	boolean onlyPayOnce = false; 
 	int dice1;
 	int dice2;
 
@@ -108,7 +109,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		rollYet = true;
 		didBuy = false;
 		haveToPay = false;
-
+		onlyPayOnce = false; 
 		if (properties[players[turn].getPos()].getOwner() != -1) {
 			haveToPay = true;
 		}
@@ -128,6 +129,13 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 				players[turn].propertiesOwned.add(players[turn].getPos());
 				properties[players[turn].getPos()].setOwner(turn);
 				enoughMoney = true;
+				
+				
+				//railroads
+				if(players[turn].getPos() == 5 || players[turn].getPos() == 15 || players[turn].getPos() == 25 || players[turn].getPos() == 35)  { 
+					players[turn].setNumRailRoads(players[turn].getNumRailRoads() + 1);
+				}
+				
 
 			} else {
 				enoughMoney = false;
@@ -140,16 +148,31 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 
 	public void pay() {
 
+		//take money away 
+		players[turn].setMoney(players[turn].getMoney() - properties[players[turn].getPos()].getPay());
 		
-//		(haveToPay && turn != properties[players[turn].getPos()].getOwner()) {
-//			g.drawString("Player " + turn + " Landed On " + properties[players[turn].getPos()].getName()
-//					+ " And Has to Pay Player " + properties[players[turn].getPos()].getOwner() + " For $"
-//					+ properties[players[turn].getPos()].getPay() + "!", 1045, 250);
+		//give money
+		players[properties[players[turn].getPos()].getOwner()].setMoney(players[properties[players[turn].getPos()].getOwner()].getMoney() 
+				+ properties[players[turn].getPos()].getPay());
+		onlyPayOnce = true; 
+		System.out.println(turn + "paid" + properties[players[turn].getPos()].getPay());
 	}
+	
+	public void luxuryTax() { 
+		players[turn].setMoney(players[turn].getMoney() - 100);
+		onlyPayOnce = true; 
+	}
+	public void incomeTax() { 
+		players[turn].setMoney(players[turn].getMoney() - 200);
+		onlyPayOnce = true; 
+	}
+	
+	
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-
+		System.out.println("0 Money " + players[0].getMoney()); 
+		System.out.println("1 Money " + players[1].getMoney()); 
 		Graphics2D g2 = (Graphics2D) g;
 
 		g2.setStroke(new BasicStroke(10));
@@ -217,13 +240,20 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		else if (players[turn].getPos() == 4 && rollYet) {
 
 			g.drawString("INCOME TAX! PAY $200!", 1045, 200);
-
+			
+			if(!onlyPayOnce) {
+			incomeTax();
+			} 
 		}
 
 		else if (players[turn].getPos() == 38 && rollYet) {
 
 			g.drawString("LUXURY TAX! PAY $100!", 1045, 200);
 
+			if(!onlyPayOnce) {
+				luxuryTax();
+				} 
+			
 		}
 
 		else if (!didBuy && rollYet && properties[players[turn].getPos()].getOwner() == turn) {
@@ -284,12 +314,36 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 
 		g.setFont(new Font("Times New Roman", Font.BOLD, 15));
 
-		if (haveToPay && turn != properties[players[turn].getPos()].getOwner()) {
+		if (haveToPay && turn != properties[players[turn].getPos()].getOwner() ) {
+			
+			if(players[turn].getPos() != 5 && players[turn].getPos() != 15 && players[turn].getPos() != 25 && players[turn].getPos() != 35) {
+			
 			g.drawString("Player " + turn + " Landed On " + properties[players[turn].getPos()].getName()
 					+ " And Has to Pay Player " + properties[players[turn].getPos()].getOwner() + " For $"
 					+ properties[players[turn].getPos()].getPay() + "!", 1045, 250);
+			}
+			
+			if(players[turn].getPos() == 5 || players[turn].getPos() == 15 || players[turn].getPos() == 25 || players[turn].getPos() == 35) {
+				
+				//fix railroads
+				
+				
+				g.drawString("Player " + turn + " Landed On " + properties[players[turn].getPos()].getName()
+						+ " And Has to Pay Player " + properties[players[turn].getPos()].getOwner() + " For $"
+						+ properties[players[turn].getPos()].getPay() + "!", 1045, 250);
+				}
+			
+			if(!onlyPayOnce) { 
+				pay();
+			}
+			
+			
 		}
 
+		
+		
+		
+		
 		if (turn == 0) {
 			g.setColor(Color.BLUE);
 		}
@@ -408,7 +462,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	public void mouseClicked(MouseEvent arg0) {
 		int mx = (int) arg0.getX();
 		int my = (int) arg0.getY();
-		System.out.println(mx + " " + my);
+		//System.out.println(mx + " " + my);
 		if (mx >= 1040 & mx <= 1140 && my >= 60 && my <= 118) {
 			buy();
 		}
@@ -420,6 +474,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		if (mx >= 1278 & mx <= 1460 && my >= 60 && my <= 118) {
 			turn++;
 			rollYet = false;
+			
 		}
 	}
 
@@ -453,7 +508,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stubs
-		System.out.println(arg0.getKeyCode());
+		//System.out.println(arg0.getKeyCode());
 
 		if (arg0.getKeyCode() == 82 && rollYet == false) {
 			roll();
