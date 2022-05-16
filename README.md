@@ -4,7 +4,7 @@
 
 We recreated the Monopoly game owned by Hasbro in Java. The game consists of players rolling dice to move around the board, buying properties, collecting money, drawing cards, and winning by being the last alive. When players have no more money (negative money) and owe money to the bank or other players, they must sell or morgtage their properties to achieve enough money to pay their debts back. When players have no more money, they lose and are out of the game. 
 
-![](https://i.postimg.cc/632zck0c/code5.png)
+![]()
 
 ## How to Play
 
