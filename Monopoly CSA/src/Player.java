@@ -59,7 +59,7 @@ public class Player {
 			
 
 		}
-		/* update the picture variable location */s
+		/* update the picture variable locsations */
 		private void update() {
 
 			tx.setToTranslation(x + bounceX, y + bounceY);
