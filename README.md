@@ -1,7 +1,6 @@
 # Monopoly - Quarter 4 Project
 
 ## Description
-Description
 
 
 
