@@ -24,7 +24,7 @@ import javax.swing.Timer;
 public class Board extends JPanel implements ActionListener, MouseListener, KeyListener {
 
 	Background bg = new Background(0, 0); // aaasaas
-	Player player0 = new Player(0, 0, "Car.png", 53, 39, 0 );
+	Player player0 = new Player(0, 0, "Car.png", 53, 39, 0);
 	Player player1 = new Player(1, 0, "Dog.png", 48, 32, 0);
 	Player player2 = new Player(2, 0, "Hat.png", 0, 0, 0);
 	int turn = 0;
@@ -33,14 +33,14 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	boolean didBuy = false;
 	boolean haveToPay = false;
 	boolean enoughMoney = false;
-	boolean onlyPayOnce = false; 
+	boolean onlyPayOnce = false;
 	int dice1;
 	int dice2;
 
 	// CREATE THE OBJECT (STEP 1)ssss
 	Random rnd = new Random();
 	// https://www.falstad.com/monopoly.html
-	Property p0 = new Property("Go", -1, 930, 920, 0, -200); // special
+	Property p0 = new Property("Go", -1, 930, 930, 0, -200); // special
 	Property p1 = new Property("Mediterranean Avenue", -1, 825, 930, 60, 2);
 	Property p2 = new Property("Community Chest", -1, 740, 930, 0, 0); // special - x diff is 85
 	Property p3 = new Property("Baltic Avenue", -1, 660, 930, 60, 4);
@@ -50,39 +50,39 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	Property p7 = new Property("Chance", -1, 335, 930, 0, 0); // special
 	Property p8 = new Property("Vermont Avenue", -1, 250, 930, 100, 6);
 	Property p9 = new Property("Connecticut Avenue", -1, 167, 930, 100, 8);
-	Property p10 = new Property("VISITING JAIL", -1, 0, 890, 0, 0); // special
+	Property p10 = new Property("VISITING JAIL", -1, 55, 930, 0, 0); // special
 
-	Property p11 = new Property("St. Charles Place", -1, 55, 820, 140, 10);
-	Property p12 = new Property("Electric Company", -1, 55, 740, 150, 0); // utilities - y difference of 80
-	Property p13 = new Property("States Avenue", -1, 55, 660, 140, 10);
-	Property p14 = new Property("Virginia Avenue", -1, 55, 580, 160, 12);
-	Property p15 = new Property("Pennsylvania Railroad", -1, 55, 500, 200, 25);// special
-	Property p16 = new Property("St. James Place", -1, 55, 420, 180, 14);
-	Property p17 = new Property("Community Chest", -1, 55, 340, 0, 0); // special
-	Property p18 = new Property("Tennessee Avenue", -1, 55, 260, 180, 14);
-	Property p19 = new Property("New York Avenue", -1, 55, 180, 200, 16);
+	Property p11 = new Property("St. Charles Place", -1, 55, 790, 140, 10);
+	Property p12 = new Property("Electric Company", -1, 55, 710, 150, 0); // utilities - y difference of 80
+	Property p13 = new Property("States Avenue", -1, 55, 630, 140, 10);
+	Property p14 = new Property("Virginia Avenue", -1, 55, 550, 160, 12);
+	Property p15 = new Property("Pennsylvania Railroad", -1, 55, 470, 200, 25);// special
+	Property p16 = new Property("St. James Place", -1, 55, 390, 180, 14);
+	Property p17 = new Property("Community Chest", -1, 55, 310, 0, 0); // special
+	Property p18 = new Property("Tennessee Avenue", -1, 55, 230, 180, 14);
+	Property p19 = new Property("New York Avenue", -1, 55, 150, 200, 16);
 	Property p20 = new Property("Free Parking", -1, 55, 55, 0, 0); // special
 
-	Property p21 = new Property("Kentucky Avenue", -1, 170, 55, 220, 18);
-	Property p22 = new Property("Chance", -1, 255, 55, 0, 0); // special
-	Property p23 = new Property("Indiana Avenue", -1, 340, 55, 220, 18);
-	Property p24 = new Property("Illinois Avenue", -1, 425, 55, 240, 20);
-	Property p25 = new Property("B&O Railroad", -1, 510, 55, 200, 25); // special
-	Property p26 = new Property("Atlantic Avenue", -1, 595, 55, 260, 22);
-	Property p27 = new Property("Ventnor Avenue", -1, 680, 55, 260, 22);
-	Property p28 = new Property("Water Works", -1, 765, 55, 150, 0); // utilities
-	Property p29 = new Property("Marvin Gardens", -1, 850, 55, 280, 24);
-	Property p30 = new Property("JAIL", -1, 930, 55, 0, 0); // special
+	Property p21 = new Property("Kentucky Avenue", -1, 200, 55, 220, 18);
+	Property p22 = new Property("Chance", -1, 285, 55, 0, 0); // special
+	Property p23 = new Property("Indiana Avenue", -1, 370, 55, 220, 18);
+	Property p24 = new Property("Illinois Avenue", -1, 455, 55, 240, 20);
+	Property p25 = new Property("B&O Railroad", -1, 540, 55, 200, 25); // special
+	Property p26 = new Property("Atlantic Avenue", -1, 625, 55, 260, 22);
+	Property p27 = new Property("Ventnor Avenue", -1, 710, 55, 260, 22);
+	Property p28 = new Property("Water Works", -1, 795, 55, 150, 0); // utilities
+	Property p29 = new Property("Marvin Gardens", -1, 880, 55, 280, 24);
+	Property p30 = new Property("JAIL", -1, 940, 55, 0, 0); // special
 
-	Property p31 = new Property("Pacific Avenue", -1, 940, 170, 300, 26);
-	Property p32 = new Property("North Carolina Avenue", -1, 940, 250, 300, 26);
-	Property p33 = new Property("Community Chest", -1, 940, 330, 0, 0); // special
-	Property p34 = new Property("Pennsylvania Avenue", -1, 940, 410, 320, 28);
-	Property p35 = new Property("Short Line", -1, 940, 490, 200, 25);
-	Property p36 = new Property("Chance", -1, 940, 570, 0, 0); // special
-	Property p37 = new Property("Park Place", -1, 940, 650, 350, 38);
-	Property p38 = new Property("Luxury Tax", -1, 940, 730, 0, -100); // special
-	Property p39 = new Property("Boardwalk", -1, 940, 810, 400, 50);
+	Property p31 = new Property("Pacific Avenue", -1, 940, 190, 300, 26);
+	Property p32 = new Property("North Carolina Avenue", -1, 940, 270, 300, 26);
+	Property p33 = new Property("Community Chest", -1, 940, 350, 0, 0); // special
+	Property p34 = new Property("Pennsylvania Avenue", -1, 940, 430, 320, 28);
+	Property p35 = new Property("Short Line", -1, 940, 510, 200, 25);
+	Property p36 = new Property("Chance", -1, 940, 590, 0, 0); // special
+	Property p37 = new Property("Park Place", -1, 940, 670, 350, 38);
+	Property p38 = new Property("Luxury Tax", -1, 940, 750, 0, -100); // special
+	Property p39 = new Property("Boardwalk", -1, 940, 830, 400, 50);
 
 	Property[] properties = { p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19,
 			p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38, p39 };
@@ -95,47 +95,51 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		this.dice1 = dice1;
 		this.dice2 = dice2;
 		return dice1 + dice2;
+		//return 5;
 	}
 
 	public void roll() {
-		players[turn].setPos(players[turn].getPos() + dice());
+		int original = players[turn].getPos();
+//		if(original == 10) {
+//			players[turn].setVx(10);
+//		}
+		players[turn].setNewPosition(original + dice());
 
-		if (players[turn].getPos() >= 40) {
-			players[turn].setPos(players[turn].getPos() - 39);
+		if (players[turn].getNewPosition() >= 40) {
+			players[turn].setNewPosition(players[turn].getNewPosition() - 39);
 		}
-
-		players[turn].setX(properties[players[turn].getPos()].getX() - players[turn].getWidth() / 2);
-		players[turn].setY(properties[players[turn].getPos()].getY());
 		rollYet = true;
 		didBuy = false;
 		haveToPay = false;
-		onlyPayOnce = false; 
-		if (properties[players[turn].getPos()].getOwner() != -1) {
+		onlyPayOnce = false;
+		if (properties[players[turn].getNewPosition()].getOwner() != -1) {
 			haveToPay = true;
 		}
 
 	}
 
 	public void buy() {
-		if (players[turn].getPos() != 0 && players[turn].getPos() != 2 && players[turn].getPos() != 4
-				&& players[turn].getPos() != 7 && players[turn].getPos() != 10 && players[turn].getPos() != 17
-				&& players[turn].getPos() != 20 && players[turn].getPos() != 22 && players[turn].getPos() != 30
-				&& players[turn].getPos() != 33 && players[turn].getPos() != 36 && players[turn].getPos() != 38
-				&& properties[players[turn].getPos()].getOwner() == -1) {
+		if (players[turn].getNewPosition() != 0 && players[turn].getNewPosition() != 2
+				&& players[turn].getNewPosition() != 4 && players[turn].getNewPosition() != 7
+				&& players[turn].getNewPosition() != 10 && players[turn].getNewPosition() != 17
+				&& players[turn].getNewPosition() != 20 && players[turn].getNewPosition() != 22
+				&& players[turn].getNewPosition() != 30 && players[turn].getNewPosition() != 33
+				&& players[turn].getNewPosition() != 36 && players[turn].getNewPosition() != 38
+				&& properties[players[turn].getNewPosition()].getOwner() == -1) {
 
-			if ((players[turn].getMoney() >= properties[players[turn].getPos()].getPrice())) {
+			if ((players[turn].getMoney() >= properties[players[turn].getNewPosition()].getPrice())) {
 
-				players[turn].setMoney(players[turn].getMoney() - properties[players[turn].getPos()].getPrice());
-				players[turn].propertiesOwned.add(players[turn].getPos());
-				properties[players[turn].getPos()].setOwner(turn);
+				players[turn]
+						.setMoney(players[turn].getMoney() - properties[players[turn].getNewPosition()].getPrice());
+				players[turn].propertiesOwned.add(players[turn].getNewPosition());
+				properties[players[turn].getNewPosition()].setOwner(turn);
 				enoughMoney = true;
-				
-				
-				//railroads
-				if(players[turn].getPos() == 5 || players[turn].getPos() == 15 || players[turn].getPos() == 25 || players[turn].getPos() == 35)  { 
+
+				// railroads
+				if (players[turn].getNewPosition() == 5 || players[turn].getNewPosition() == 15
+						|| players[turn].getNewPosition() == 25 || players[turn].getNewPosition() == 35) {
 					players[turn].setNumRailRoads(players[turn].getNumRailRoads() + 1);
 				}
-				
 
 			} else {
 				enoughMoney = false;
@@ -148,31 +152,33 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 
 	public void pay() {
 
-		//take money away 
-		players[turn].setMoney(players[turn].getMoney() - properties[players[turn].getPos()].getPay());
-		
-		//give money
-		players[properties[players[turn].getPos()].getOwner()].setMoney(players[properties[players[turn].getPos()].getOwner()].getMoney() 
-				+ properties[players[turn].getPos()].getPay());
-		onlyPayOnce = true; 
-		System.out.println(turn + "paid" + properties[players[turn].getPos()].getPay());
+		// take money away
+		players[turn].setMoney(players[turn].getMoney() - properties[players[turn].getNewPosition()].getPay());
+
+		// give money
+		players[properties[players[turn].getNewPosition()].getOwner()]
+				.setMoney(players[properties[players[turn].getNewPosition()].getOwner()].getMoney()
+						+ properties[players[turn].getNewPosition()].getPay());
+		onlyPayOnce = true;
+		// System.out.println(turn + "paid" +
+		// properties[players[turn].getNewPosition()].getPay());
 	}
-	
-	public void luxuryTax() { 
+
+	public void luxuryTax() {
 		players[turn].setMoney(players[turn].getMoney() - 100);
-		onlyPayOnce = true; 
+		onlyPayOnce = true;
 	}
-	public void incomeTax() { 
+
+	public void incomeTax() {
 		players[turn].setMoney(players[turn].getMoney() - 200);
-		onlyPayOnce = true; 
+		onlyPayOnce = true;
 	}
-	
-	
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-		System.out.println("0 Money " + players[0].getMoney()); 
-		System.out.println("1 Money " + players[1].getMoney()); 
+
+//		System.out.println("0 Pos " + players[0].getPos()); 
+//		System.out.println("1 Pos " + players[1].getPos()); 
 		Graphics2D g2 = (Graphics2D) g;
 
 		g2.setStroke(new BasicStroke(10));
@@ -187,6 +193,86 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		player1.paint(g);
 		// player2.paint(g);
 
+		
+		//MOVEMENT CODE
+		if (players[turn].getNewPosition() <= 20 && !(players[turn].getX() <= 20
+				+ properties[players[turn].getNewPosition()].getX() - players[turn].getWidth() / 2
+				&& players[turn].getX() >= -20 + properties[players[turn].getNewPosition()].getX()
+						- players[turn].getWidth() / 2)) {
+			players[turn].setVx(-10);
+			players[turn].setBounceY((int) (40 * Math.cos(.03 * players[turn].getX())));
+		}
+
+		if (players[turn].getPos() == 10) {
+			players[turn].setBounceX(-40);
+		}
+
+		if (players[turn].getNewPosition() <= 30 && players[turn].getNewPosition() > 10
+				&& !(players[turn].getY() <= 20 + properties[players[turn].getNewPosition()].getY()
+						&& players[turn].getY() >= -20 + properties[players[turn].getNewPosition()].getY())) {
+			players[turn].setVy(-10);
+			players[turn].setBounceX((int) (40 * Math.cos(.03 * players[turn].getY())));
+		}
+
+		if (players[turn].getNewPosition() <= 39 && players[turn].getNewPosition() > 20
+				&& !(players[turn].getX() <= 20 + properties[players[turn].getNewPosition()].getX()
+						- players[turn].getWidth() / 2
+						&& players[turn].getX() >= -20 + properties[players[turn].getNewPosition()].getX()
+								- players[turn].getWidth() / 2)) {
+			players[turn].setVx(10);
+			players[turn].setBounceY((int) (40 * Math.cos(.03 * players[turn].getX())));
+		}
+
+		if (((players[turn].getNewPosition() <= 39 && players[turn].getNewPosition() > 30)
+				|| players[turn].getNewPosition() <= 10)
+				&& !(players[turn].getY() <= 20 + properties[players[turn].getNewPosition()].getY()
+						&& players[turn].getY() >= -20 + properties[players[turn].getNewPosition()].getY())) {
+			players[turn].setVy(10);
+			players[turn].setBounceX((int) (40 * Math.cos(.03 * players[turn].getY())));
+		}
+
+		if (players[turn].getX() <= 20 + properties[players[turn].getNewPosition()].getX()
+				- players[turn].getWidth() / 2
+				&& players[turn].getX() >= -20 + properties[players[turn].getNewPosition()].getX()
+						- players[turn].getWidth() / 2) {
+			players[turn].setVx(0);
+			players[turn].setPos(players[turn].getNewPosition());
+//			System.out.println("Arrived");
+		}
+
+		if (players[turn].getY() <= 20 + properties[players[turn].getNewPosition()].getY()
+				&& players[turn].getY() >= -20 + properties[players[turn].getNewPosition()].getY()) {
+			players[turn].setVy(0);
+			players[turn].setPos(players[turn].getNewPosition());
+//			System.out.println("Arrived");
+		}
+
+		if (players[turn].getX() > 50 && players[turn].getPos() < 10) {
+			players[turn].setVy(0);
+		}
+
+		if (players[turn].getX() < 890 && (players[turn].getPos() >= 20 && players[turn].getPos() < 30)) {
+			players[turn].setVy(0);
+		}
+
+		if (players[turn].getY() > 80 && (players[turn].getPos() >= 10 && players[turn].getPos() < 20)) {
+			players[turn].setVx(0);
+		}
+
+		if (players[turn].getY() < 910 && (players[turn].getPos() >= 30 && players[turn].getPos() <= 39)) {
+			players[turn].setVx(0);
+		}
+
+		if (players[turn].getX() <= 20 + properties[players[turn].getNewPosition()].getX()
+				- players[turn].getWidth() / 2
+				&& players[turn].getX() >= -20 + properties[players[turn].getNewPosition()].getX()
+						- players[turn].getWidth() / 2
+				&& players[turn].getY() <= 20 + properties[players[turn].getNewPosition()].getY()
+				&& players[turn].getY() >= -20 + properties[players[turn].getNewPosition()].getY()) {
+			players[turn].setPos(players[turn].getNewPosition());
+		//	System.out.println("Arrived");
+		}
+
 		g.setFont(new Font("Times New Roman", Font.BOLD, 50));
 
 		g.drawString("Player " + turn + "'s Turn", 1045, 150);
@@ -199,75 +285,75 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 			g.drawString("Total Distance: " + (dice1 + dice2), 1250, 180);
 		}
 
-		if (players[turn].getPos() == 0 && rollYet) {
+		if (players[turn].getNewPosition() == 0 && rollYet) {
 
 			g.drawString("You are on GO!", 1045, 200);
 
 		}
 
-		else if (players[turn].getPos() == 10 && rollYet) {
+		else if (players[turn].getNewPosition() == 10 && rollYet) {
 
 			g.drawString("Visiting JAIL!", 1045, 200);
 
 		}
 
-		else if (players[turn].getPos() == 20 && rollYet) {
+		else if (players[turn].getNewPosition() == 20 && rollYet) {
 
 			g.drawString("ON FREE PARKING!", 1045, 200);
 
 		}
 
-		else if (players[turn].getPos() == 30 && rollYet) {
+		else if (players[turn].getNewPosition() == 30 && rollYet) {
 
 			g.drawString("Going to JAIL!", 1045, 200);
 
 		}
 
-		else if ((players[turn].getPos() == 7 || players[turn].getPos() == 22 || players[turn].getPos() == 36)
-				&& rollYet) {
+		else if ((players[turn].getNewPosition() == 7 || players[turn].getNewPosition() == 22
+				|| players[turn].getNewPosition() == 36) && rollYet) {
 
 			g.drawString("Landed on Chance! Draw a Card!", 1045, 200);
 
 		}
 
-		else if ((players[turn].getPos() == 2 || players[turn].getPos() == 17 || players[turn].getPos() == 33)
-				&& rollYet) {
+		else if ((players[turn].getNewPosition() == 2 || players[turn].getNewPosition() == 17
+				|| players[turn].getNewPosition() == 33) && rollYet) {
 
 			g.drawString("Landed on Community Chest! Draw a Card!", 1045, 200);
 
 		}
 
-		else if (players[turn].getPos() == 4 && rollYet) {
+		else if (players[turn].getNewPosition() == 4 && rollYet) {
 
 			g.drawString("INCOME TAX! PAY $200!", 1045, 200);
-			
-			if(!onlyPayOnce) {
-			incomeTax();
-			} 
+
+			if (!onlyPayOnce) {
+				incomeTax();
+			}
 		}
 
-		else if (players[turn].getPos() == 38 && rollYet) {
+		else if (players[turn].getNewPosition() == 38 && rollYet) {
 
 			g.drawString("LUXURY TAX! PAY $100!", 1045, 200);
 
-			if(!onlyPayOnce) {
+			if (!onlyPayOnce) {
 				luxuryTax();
-				} 
-			
+			}
+
 		}
 
-		else if (!didBuy && rollYet && properties[players[turn].getPos()].getOwner() == turn) {
+		else if (!didBuy && rollYet && properties[players[turn].getNewPosition()].getOwner() == turn) {
 
 			g.setFont(new Font("Times New Roman", Font.BOLD, 40));
 			g.drawString("Player " + turn + " Landed On His Own Property, "
-					+ properties[players[turn].getPos()].getName() + "!", 1045, 225);
+					+ properties[players[turn].getNewPosition()].getName() + "!", 1045, 225);
 
 		}
 
-		else if (properties[players[turn].getPos()].getOwner() == -1 && rollYet) {
+		else if (properties[players[turn].getNewPosition()].getOwner() == -1 && rollYet) {
 
-			g.drawString("Do You Want To Buy " + properties[players[turn].getPos()].getName() + "?", 1045, 225);
-			g.drawString("It Will Cost $" + properties[players[turn].getPos()].getPrice(), 1045, 250);
+			g.drawString("Do You Want To Buy " + properties[players[turn].getNewPosition()].getName() + "?", 1045, 225);
+			g.drawString("It Will Cost $" + properties[players[turn].getNewPosition()].getPrice(), 1045, 250);
 		}
 
 		if (turn >= numPlayers) {
@@ -302,11 +388,11 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		if (didBuy && rollYet) {
 
 			if (enoughMoney) {
-				g.drawString("Player " + turn + " Bought " + properties[players[turn].getPos()].getName() + " For $"
-						+ properties[players[turn].getPos()].getPrice() + "!", 1045, 250);
+				g.drawString("Player " + turn + " Bought " + properties[players[turn].getNewPosition()].getName()
+						+ " For $" + properties[players[turn].getNewPosition()].getPrice() + "!", 1045, 250);
 			} else {
-				g.drawString("Player " + turn + " CANNOT BUY " + properties[players[turn].getPos()].getName() + " For $"
-						+ properties[players[turn].getPos()].getPrice() + "!", 1045, 300);
+				g.drawString("Player " + turn + " CANNOT BUY " + properties[players[turn].getNewPosition()].getName()
+						+ " For $" + properties[players[turn].getNewPosition()].getPrice() + "!", 1045, 300);
 				g.drawString("NOT ENOUGH MONEY!!", 1045, 350);
 			}
 
@@ -314,36 +400,32 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 
 		g.setFont(new Font("Times New Roman", Font.BOLD, 15));
 
-		if (haveToPay && turn != properties[players[turn].getPos()].getOwner() ) {
-			
-			if(players[turn].getPos() != 5 && players[turn].getPos() != 15 && players[turn].getPos() != 25 && players[turn].getPos() != 35) {
-			
-			g.drawString("Player " + turn + " Landed On " + properties[players[turn].getPos()].getName()
-					+ " And Has to Pay Player " + properties[players[turn].getPos()].getOwner() + " For $"
-					+ properties[players[turn].getPos()].getPay() + "!", 1045, 250);
+		if (haveToPay && turn != properties[players[turn].getNewPosition()].getOwner()) {
+
+			if (players[turn].getNewPosition() != 5 && players[turn].getNewPosition() != 15
+					&& players[turn].getNewPosition() != 25 && players[turn].getNewPosition() != 35) {
+
+				g.drawString("Player " + turn + " Landed On " + properties[players[turn].getNewPosition()].getName()
+						+ " And Has to Pay Player " + properties[players[turn].getNewPosition()].getOwner() + " For $"
+						+ properties[players[turn].getNewPosition()].getPay() + "!", 1045, 250);
 			}
-			
-			if(players[turn].getPos() == 5 || players[turn].getPos() == 15 || players[turn].getPos() == 25 || players[turn].getPos() == 35) {
-				
-				//fix railroads
-				
-				
-				g.drawString("Player " + turn + " Landed On " + properties[players[turn].getPos()].getName()
-						+ " And Has to Pay Player " + properties[players[turn].getPos()].getOwner() + " For $"
-						+ properties[players[turn].getPos()].getPay() + "!", 1045, 250);
-				}
-			
-			if(!onlyPayOnce) { 
+
+			if (players[turn].getNewPosition() == 5 || players[turn].getNewPosition() == 15
+					|| players[turn].getNewPosition() == 25 || players[turn].getNewPosition() == 35) {
+
+				// fix railroads
+
+				g.drawString("Player " + turn + " Landed On " + properties[players[turn].getNewPosition()].getName()
+						+ " And Has to Pay Player " + properties[players[turn].getNewPosition()].getOwner() + " For $"
+						+ properties[players[turn].getNewPosition()].getPay() + "!", 1045, 250);
+			}
+
+			if (!onlyPayOnce) {
 				pay();
 			}
-			
-			
+
 		}
 
-		
-		
-		
-		
 		if (turn == 0) {
 			g.setColor(Color.BLUE);
 		}
@@ -380,7 +462,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 				g.drawRect(1550, i * 1000 / players.length, 400, 1000 / players.length);
 				g.setColor(Color.BLACK);
 				g.drawString("Money: " + players[i].getMoney(), 1560, i * 1000 / players.length + 20);
-				g.drawString("Position: " + properties[players[i].getPos()].getName(), 1560,
+				g.drawString("Position: " + properties[players[i].getNewPosition()].getName(), 1560,
 						i * 1000 / players.length + 20 + 30);
 				g.drawString("Properties Owned:", 1560, i * 1000 / players.length + 20 + 30 + 30);
 
@@ -394,7 +476,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 				g.drawRect(1550, i * 1000 / players.length, 400, 1000 / players.length);
 				g.setColor(Color.BLACK);
 				g.drawString("Money: " + players[i].getMoney(), 1560, i * 1000 / players.length + 20);
-				g.drawString("Position: " + properties[players[i].getPos()].getName(), 1560,
+				g.drawString("Position: " + properties[players[i].getNewPosition()].getName(), 1560,
 						i * 1000 / players.length + 20 + 30);
 				g.drawString("Properties Owned:", 1560, i * 1000 / players.length + 20 + 30 + 30);
 
@@ -418,7 +500,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 				g.drawRect(1550, i * 1000 / players.length, 400, 1000 / players.length);
 				g.setColor(Color.BLACK);
 				g.drawString("Money: " + players[0].getMoney(), 1560, i * 1000 / players.length + 20);
-				g.drawString("Position: " + properties[players[i].getPos()].getName(), 1560,
+				g.drawString("Position: " + properties[players[i].getNewPosition()].getName(), 1560,
 						i * 1000 / players.length + 20 + 30);
 				for (int j = 0; j < players[i].getPropertiesOwned().size(); j++) {
 					g.drawString(properties[players[i].getPropertiesOwned().get(j)].getName(), 1560,
@@ -462,7 +544,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	public void mouseClicked(MouseEvent arg0) {
 		int mx = (int) arg0.getX();
 		int my = (int) arg0.getY();
-		//System.out.println(mx + " " + my);
+		 System.out.println(mx + " " + my);
 		if (mx >= 1040 & mx <= 1140 && my >= 60 && my <= 118) {
 			buy();
 		}
@@ -474,7 +556,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		if (mx >= 1278 & mx <= 1460 && my >= 60 && my <= 118) {
 			turn++;
 			rollYet = false;
-			
+
 		}
 	}
 
@@ -508,7 +590,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stubs
-		//System.out.println(arg0.getKeyCode());
+		// System.out.println(arg0.getKeyCode());
 
 		if (arg0.getKeyCode() == 82 && rollYet == false) {
 			roll();

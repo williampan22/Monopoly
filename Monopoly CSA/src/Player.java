@@ -15,13 +15,18 @@ public class Player {
 	String avatar;  
 	int money = 1500;
 	ArrayList<Integer> propertiesOwned = new ArrayList<Integer>();
-	int x = 870; 
+	int x = 920; 
 	int y = 900;
 	private Image img; 	
 	private AffineTransform tx;
 	int width; 
 	int height;
 	int numRailRoads; 
+	int newPosition;
+	int bounceY = 0;
+	int bounceX = 0;
+	int vx = 0;
+	int vy = 0;
 	
 
 	public Player(int playerNumber, int pos, String avatar, int width, int height, int numRailRoads) {
@@ -57,11 +62,53 @@ public class Player {
 		/* update the picture variable location */
 		private void update() {
 
-			tx.setToTranslation(x, y);
+			tx.setToTranslation(x + bounceX, y + bounceY);
 			tx.scale(0.3, 0.3);
+			x+=vx;
+			y+=vy;
 			
 		}
 		
+		public int getNewPosition() {
+			return newPosition;
+		}
+
+		public void setNewPosition(int newPosition) {
+			this.newPosition = newPosition;
+		}
+
+		public int getBounceY() {
+			return bounceY;
+		}
+
+		public void setBounceY(int bounceY) {
+			this.bounceY = bounceY;
+		}
+
+		public int getBounceX() {
+			return bounceX;
+		}
+
+		public void setBounceX(int bounceX) {
+			this.bounceX = bounceX;
+		}
+
+		public int getVx() {
+			return vx;
+		}
+
+		public void setVx(int vx) {
+			this.vx = vx;
+		}
+
+		public int getVy() {
+			return vy;
+		}
+
+		public void setVy(int vy) {
+			this.vy = vy;
+		}
+
 		private void init(double a, double b) {
 			tx.setToTranslation(a, b);
 			tx.scale(.3, .3);
