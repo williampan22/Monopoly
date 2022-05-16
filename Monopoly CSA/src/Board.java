@@ -35,7 +35,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	boolean enoughMoney = false;
 	boolean onlyPayOnce = false;
 	int dice1;
-	int dice2;
+	int dice2; 
 
 	// CREATE THE OBJECT (STEP 1)ssss
 	Random rnd = new Random();

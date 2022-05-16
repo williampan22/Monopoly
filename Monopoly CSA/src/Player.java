@@ -65,7 +65,7 @@ public class Player {
 			tx.setToTranslation(x + bounceX, y + bounceY);
 			tx.scale(0.3, 0.3);
 			x+=vx;
-			y+=vy;
+			y+=vy; 
 			
 		}
 		
