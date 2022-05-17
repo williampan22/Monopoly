@@ -61,7 +61,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	Property p17 = new Property("Community Chest", -1, 55, 310, 0, 0); // special
 	Property p18 = new Property("Tennessee Avenue", -1, 55, 230, 180, 14);
 	Property p19 = new Property("New York Avenue", -1, 55, 150, 200, 16);
-	Property p20 = new Property("Free Parking", -1, 55, 55, 0, 0); // special
+	Property p20 = new Property("Free Parking", -1, 40, 55, 0, 0); // special
 
 	Property p21 = new Property("Kentucky Avenue", -1, 200, 55, 220, 18);
 	Property p22 = new Property("Chance", -1, 285, 55, 0, 0); // special
@@ -72,7 +72,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	Property p27 = new Property("Ventnor Avenue", -1, 710, 55, 260, 22);
 	Property p28 = new Property("Water Works", -1, 795, 55, 150, 0); // utilities
 	Property p29 = new Property("Marvin Gardens", -1, 880, 55, 280, 24);
-	Property p30 = new Property("JAIL", -1, 940, 55, 0, 0); // special
+	Property p30 = new Property("JAIL", -1, 940, 30, 0, 0); // special
 
 	Property p31 = new Property("Pacific Avenue", -1, 940, 190, 300, 26);
 	Property p32 = new Property("North Carolina Avenue", -1, 940, 270, 300, 26);
@@ -95,7 +95,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		this.dice1 = dice1;
 		this.dice2 = dice2;
 		return dice1 + dice2;
-		//return 5;
+		
 	}
 
 	public void roll() {
@@ -244,7 +244,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 				&& players[turn].getY() >= -20 + properties[players[turn].getNewPosition()].getY()) {
 			players[turn].setVy(0);
 			players[turn].setPos(players[turn].getNewPosition());
-//			System.out.println("Arrived");
+			System.out.println("Arrived");
 		}
 
 		if (players[turn].getX() > 50 && players[turn].getPos() < 10) {
