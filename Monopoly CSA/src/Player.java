@@ -27,17 +27,18 @@ public class Player {
 	int bounceX = 0;
 	int vx = 0;
 	int vy = 0;
-	
+	int numUtilities;
 
-	public Player(int playerNumber, int pos, String avatar, int width, int height, int numRailRoads) {
+	public Player(int playerNumber, int pos, String avatar, int width, int height, int numRailRoads, int numUtilities) {
 		this.playerNumber = playerNumber;
 		this.avatar = avatar;
-			img = getImage("/imgs/" + avatar); //load the image for Treessssssss
+			img = getImage("/imgs/" + avatar); //load the image for Treesssssssss
 			tx = AffineTransform.getTranslateInstance(x, y );
 			this.pos = pos;
 			this.width = width; 
 			this.height = height;
 			this.numRailRoads = 0; 
+			this.numUtilities = 0; 
 			init(x, y); 				//initialize the location of the image
 			
 			//use your variabless
@@ -205,7 +206,13 @@ public class Player {
 		this.numRailRoads = numRailRoads;
 	}
 	
-	
+	public int getNumUtilities() {
+		return numUtilities;
+	}
+
+	public void setNumUtilities(int numUtilities) {
+		this.numUtilities = numUtilities;
+	}
 	
 	
 	

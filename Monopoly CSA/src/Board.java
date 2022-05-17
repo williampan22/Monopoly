@@ -23,10 +23,10 @@ import javax.swing.Timer;
 
 public class Board extends JPanel implements ActionListener, MouseListener, KeyListener {
 
-	Background bg = new Background(0, 0); // aaasaassssss
-	Player player0 = new Player(0, 0, "Car.png", 53, 39, 0);
-	Player player1 = new Player(1, 0, "Dog.png", 48, 32, 0);
-	Player player2 = new Player(2, 0, "Hat.png", 0, 0, 0);
+	Background bg = new Background(0, 0); // aaasaas
+	Player player0 = new Player(0, 0, "Car.png", 53, 39, 0, 0);
+	Player player1 = new Player(1, 0, "Dog.png", 48, 32, 0, 0);
+	Player player2 = new Player(2, 0, "Hat.png", 0, 0, 0, 0);
 	int turn = 0;
 	int numPlayers = 2;
 	boolean rollYet = false;
@@ -35,9 +35,11 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	boolean enoughMoney = false;
 	boolean onlyPayOnce = false;
 	int dice1;
-	int dice2; 
+	int dice2;
+	int railRoadPay = 0;
+	int utilitiesPay = 0;
 
-	// CREATE THE OBJECT (STEP 1)ssss
+	// CREATE THE OBJECT (STEP 1)sssss
 	Random rnd = new Random();
 	// https://www.falstad.com/monopoly.html
 	Property p0 = new Property("Go", -1, 930, 930, 0, -200); // special
@@ -94,7 +96,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		int dice2 = (int) (Math.random() * 6 + 1);
 		this.dice1 = dice1;
 		this.dice2 = dice2;
-		return dice1 + dice2;
+		return 12;
 		
 	}
 
@@ -140,6 +142,10 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 						|| players[turn].getNewPosition() == 25 || players[turn].getNewPosition() == 35) {
 					players[turn].setNumRailRoads(players[turn].getNumRailRoads() + 1);
 				}
+				
+				if (players[turn].getPos() == 12 || players[turn].getPos() == 28) {
+					players[turn].setNumUtilities(players[turn].getNumUtilities() + 1);
+				}
 
 			} else {
 				enoughMoney = false;
@@ -160,8 +166,55 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 				.setMoney(players[properties[players[turn].getNewPosition()].getOwner()].getMoney()
 						+ properties[players[turn].getNewPosition()].getPay());
 		onlyPayOnce = true;
-		// System.out.println(turn + "paid" +
-		// properties[players[turn].getNewPosition()].getPay());
+		System.out.println(turn + "paid" + properties[players[turn].getNewPosition()].getPay());
+
+	}
+
+	public int payRailRoad() {
+
+		int railRoadPay = 0;
+
+		if (players[properties[players[turn].getNewPosition()].getOwner()].getNumRailRoads() == 1) {
+			railRoadPay = 25;
+		}
+		if (players[properties[players[turn].getNewPosition()].getOwner()].getNumRailRoads() == 2) {
+			railRoadPay = 50;
+		}
+		if (players[properties[players[turn].getNewPosition()].getOwner()].getNumRailRoads() == 3) {
+			railRoadPay = 100;
+		}
+		if (players[properties[players[turn].getNewPosition()].getOwner()].getNumRailRoads() == 4) {
+			railRoadPay = 400;
+		}
+
+		players[turn].setMoney(players[turn].getMoney() - railRoadPay);
+
+		// give money
+		players[properties[players[turn].getNewPosition()].getOwner()]
+				.setMoney(players[properties[players[turn].getNewPosition()].getOwner()].getMoney() + railRoadPay);
+		onlyPayOnce = true;
+
+		return railRoadPay;
+	}
+
+	public int payUtilities() {
+
+		int utilitiesPay = 0;
+
+		if (players[properties[players[turn].getNewPosition()].getOwner()].getNumUtilities() == 1) {
+			utilitiesPay = (dice1 + dice2) * 4;
+		}
+		if (players[properties[players[turn].getNewPosition()].getOwner()].getNumUtilities() == 2) {
+			utilitiesPay = (dice1 + dice2) * 10;
+		}
+
+		players[turn].setMoney(players[turn].getMoney() - utilitiesPay);
+		players[properties[players[turn].getNewPosition()].getOwner()]
+				.setMoney(players[properties[players[turn].getNewPosition()].getOwner()].getMoney() + utilitiesPay);
+		onlyPayOnce = true;
+		
+		
+		return utilitiesPay;
 	}
 
 	public void luxuryTax() {
@@ -398,31 +451,38 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 
 		}
 
-		g.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		g.setFont(new Font("Times New Roman", Font.BOLD, 14));
 
-		if (haveToPay && turn != properties[players[turn].getNewPosition()].getOwner()) {
+		if (haveToPay && turn != properties[players[turn].getPos()].getOwner()) {
 
-			if (players[turn].getNewPosition() != 5 && players[turn].getNewPosition() != 15
-					&& players[turn].getNewPosition() != 25 && players[turn].getNewPosition() != 35) {
+			if (players[turn].getNewPosition() == 5 || players[turn].getNewPosition() == 15 || players[turn].getNewPosition() == 25
+					|| players[turn].getNewPosition() == 35 ) {
+					if (!onlyPayOnce) {
+						railRoadPay = payRailRoad();
+					}
+					g.drawString("Player " + turn + " Landed On " + properties[players[turn].getNewPosition()].getName()
+							+ " And Has to Pay Player " + properties[players[turn].getNewPosition()].getOwner() + " For $"
+							+ railRoadPay + "!", 1045, 250);
+				
+				
+				
+			}else if(players[turn].getNewPosition() == 12 || players[turn].getNewPosition() == 28) { 
+				if (!onlyPayOnce) {
+					utilitiesPay = payUtilities();
+				}
+				g.drawString("Player " + turn + " Landed On " + properties[players[turn].getNewPosition()].getName()
+						+ " And Has to Pay Player " + properties[players[turn].getPos()].getOwner() + " For $"
+						+ utilitiesPay + "!", 1045, 250);
+			}else { 
+				if (!onlyPayOnce) {
+					pay();
+				}
 
 				g.drawString("Player " + turn + " Landed On " + properties[players[turn].getNewPosition()].getName()
-						+ " And Has to Pay Player " + properties[players[turn].getNewPosition()].getOwner() + " For $"
-						+ properties[players[turn].getNewPosition()].getPay() + "!", 1045, 250);
+						+ " And Has to Pay Player " + properties[players[turn].getPos()].getOwner() + " For $"
+						+ properties[players[turn].getPos()].getPay() + "!", 1045, 250);
 			}
-
-			if (players[turn].getNewPosition() == 5 || players[turn].getNewPosition() == 15
-					|| players[turn].getNewPosition() == 25 || players[turn].getNewPosition() == 35) {
-
-				// fix railroads
-
-				g.drawString("Player " + turn + " Landed On " + properties[players[turn].getNewPosition()].getName()
-						+ " And Has to Pay Player " + properties[players[turn].getNewPosition()].getOwner() + " For $"
-						+ properties[players[turn].getNewPosition()].getPay() + "!", 1045, 250);
-			}
-
-			if (!onlyPayOnce) {
-				pay();
-			}
+			
 
 		}
 
