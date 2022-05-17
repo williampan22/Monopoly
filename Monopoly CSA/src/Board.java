@@ -115,7 +115,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		if (properties[players[turn].getNewPosition()].getOwner() != -1) {
 			haveToPay = true;
 		}
-
+ 
 	}
 
 	public void buy() {
