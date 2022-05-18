@@ -34,6 +34,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	boolean haveToPay = false;
 	boolean enoughMoney = false;
 	boolean onlyPayOnce = false;
+	boolean arrived = false; 
 	int dice1;
 	int dice2;
 	int railRoadPay = 0;
@@ -96,7 +97,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		int dice2 = (int) (Math.random() * 6 + 1);
 		this.dice1 = dice1;
 		this.dice2 = dice2;
-		return 12;
+		return dice1 + dice2;
 		
 	}
 
@@ -114,6 +115,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		didBuy = false;
 		haveToPay = false;
 		onlyPayOnce = false;
+		arrived = false; 
 		if (properties[players[turn].getNewPosition()].getOwner() != -1) {
 			haveToPay = true;
 		}
@@ -290,6 +292,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 						- players[turn].getWidth() / 2) {
 			players[turn].setVx(0);
 			players[turn].setPos(players[turn].getNewPosition());
+			arrived = true; 
 //			System.out.println("Arrived");
 		}
 
@@ -297,7 +300,8 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 				&& players[turn].getY() >= -20 + properties[players[turn].getNewPosition()].getY()) {
 			players[turn].setVy(0);
 			players[turn].setPos(players[turn].getNewPosition());
-			System.out.println("Arrived");
+			arrived = true;
+//			System.out.println("Arrived");
 		}
 
 		if (players[turn].getX() > 50 && players[turn].getPos() < 10) {
@@ -316,15 +320,15 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 			players[turn].setVx(0);
 		}
 
-		if (players[turn].getX() <= 20 + properties[players[turn].getNewPosition()].getX()
-				- players[turn].getWidth() / 2
-				&& players[turn].getX() >= -20 + properties[players[turn].getNewPosition()].getX()
-						- players[turn].getWidth() / 2
-				&& players[turn].getY() <= 20 + properties[players[turn].getNewPosition()].getY()
-				&& players[turn].getY() >= -20 + properties[players[turn].getNewPosition()].getY()) {
-			players[turn].setPos(players[turn].getNewPosition());
-		//	System.out.println("Arrived");
-		}
+//		if (players[turn].getX() <= 20 + properties[players[turn].getNewPosition()].getX()
+//				- players[turn].getWidth() / 2
+//				&& players[turn].getX() >= -20 + properties[players[turn].getNewPosition()].getX()
+//						- players[turn].getWidth() / 2
+//				&& players[turn].getY() <= 20 + properties[players[turn].getNewPosition()].getY()
+//				&& players[turn].getY() >= -20 + properties[players[turn].getNewPosition()].getY()) {
+//			players[turn].setPos(players[turn].getNewPosition());
+//		//	System.out.println("Arrived");
+//		}
 
 		g.setFont(new Font("Times New Roman", Font.BOLD, 50));
 
@@ -453,7 +457,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 
 		g.setFont(new Font("Times New Roman", Font.BOLD, 14));
 
-		if (haveToPay && turn != properties[players[turn].getPos()].getOwner()) {
+		if (haveToPay && arrived && turn != properties[players[turn].getNewPosition()].getOwner()) {
 
 			if (players[turn].getNewPosition() == 5 || players[turn].getNewPosition() == 15 || players[turn].getNewPosition() == 25
 					|| players[turn].getNewPosition() == 35 ) {
@@ -605,15 +609,15 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		int mx = (int) arg0.getX();
 		int my = (int) arg0.getY();
 		 System.out.println(mx + " " + my);
-		if (mx >= 1040 & mx <= 1140 && my >= 60 && my <= 118) {
+		if (arrived && mx >= 1040 & mx <= 1140 && my >= 60 && my <= 118) {
 			buy();
 		}
 
-		if (mx >= 1157 & mx <= 1257 && my >= 60 && my <= 118) {
+		if ( rollYet == false && mx >= 1157 & mx <= 1257 && my >= 60 && my <= 118) {
 			roll();
 		}
 
-		if (mx >= 1278 & mx <= 1460 && my >= 60 && my <= 118) {
+		if (arrived && rollYet  && mx >= 1278 & mx <= 1460 && my >= 60 && my <= 118) {
 			turn++;
 			rollYet = false;
 
@@ -652,16 +656,16 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		// TODO Auto-generated method stubs
 		// System.out.println(arg0.getKeyCode());
 
-		if (arg0.getKeyCode() == 82 && rollYet == false) {
-			roll();
-		}
-		if (arg0.getKeyCode() == 84) {
-			turn++;
-			rollYet = false;
-		}
-		if (arg0.getKeyCode() == 66) {
-			buy();
-		}
+//		if (arg0.getKeyCode() == 82 && rollYet == false) {
+//			roll();
+//		}
+//		if (arg0.getKeyCode() == 84) {
+//			turn++;
+//			rollYet = false;
+//		}
+//		if (arg0.getKeyCode() == 66) {
+//			buy();
+//		}
 
 	}
 
