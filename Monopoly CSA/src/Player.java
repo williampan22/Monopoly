@@ -32,7 +32,7 @@ public class Player {
 	public Player(int playerNumber, int pos, String avatar, int width, int height, int numRailRoads, int numUtilities) {
 		this.playerNumber = playerNumber;
 		this.avatar = avatar;
-			img = getImage("/imgs/" + avatar); //load the image for Treesssssssss
+			img = getImage("/imgs/" + avatar); //load the image for Treessssssssss
 			tx = AffineTransform.getTranslateInstance(x, y );
 			this.pos = pos;
 			this.width = width; 

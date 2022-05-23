@@ -14,7 +14,7 @@ public class Background{
 	private AffineTransform tx;
 
 	public Background(int x, int y) {
-		img = getImage("/imgs/board.png"); //load the image for Treesssssssssss
+		img = getImage("/imgs/board.png"); //load the image for Treessssssssssss
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y); 				//initialize the location of the image
 									//use your variables

@@ -111,7 +111,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	public void roll() {
 		int original = players[turn].getPos();
 //		if(original == 10) {
-//			players[turn].setVx(10);
+//			players[turn].setVx(10);s
 //		}
 		players[turn].setNewPosition(original + dice());
 
