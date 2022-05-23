@@ -35,11 +35,18 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	boolean enoughMoney = false;
 	boolean onlyPayOnce = false;
 	boolean arrived = false; 
+	boolean bankrupt = false; 
+	boolean mortgage = false; 
 	int dice1;
 	int dice2;
 	int railRoadPay = 0;
 	int utilitiesPay = 0;
-
+	int mortgagePos; 
+	boolean didMortgage = false; 
+	
+	
+	
+	
 	// CREATE THE OBJECT (STEP 1)sssss
 	Random rnd = new Random();
 	// https://www.falstad.com/monopoly.html
@@ -109,6 +116,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		players[turn].setNewPosition(original + dice());
 
 		if (players[turn].getNewPosition() >= 40) {
+			players[turn].setMoney(players[turn].getMoney() + 200);
 			players[turn].setNewPosition(players[turn].getNewPosition() - 39);
 		}
 		rollYet = true;
@@ -116,6 +124,8 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		haveToPay = false;
 		onlyPayOnce = false;
 		arrived = false; 
+		didMortgage = false; 
+		 
 		if (properties[players[turn].getNewPosition()].getOwner() != -1) {
 			haveToPay = true;
 		}
@@ -158,6 +168,11 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		}
 	}
 
+	public void passGo() { 
+		
+	}
+	
+	
 	public void pay() {
 
 		// take money away
@@ -228,10 +243,69 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		players[turn].setMoney(players[turn].getMoney() - 200);
 		onlyPayOnce = true;
 	}
+	
+	public void mortgage() { 
+		
+		
+			
+		
+		
+		players[turn].setMoney(players[turn].getMoney() + properties[mortgagePos].getPrice() / 2 );
+		properties[mortgagePos].setOwner(-1);
+		didMortgage = true; 
+		for(int i = 0; i < players[turn].getPropertiesOwned().size(); i++) { 
+			if(players[turn].getPropertiesOwned().get(i) == mortgagePos) { 
+				players[turn].getPropertiesOwned().remove(i);
+				break;
+			}
+			
+			
+		}
+		
+		
+		
+	}
+	
+	public void bankruptcy() { 
+		
+	}
+	
+	
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-
+		
+		
+		
+		
+		
+//		System.out.println("mortgage " + mortgage);
+//		System.out.println("bankrupt " + bankrupt);
+//		System.out.println("mortgage Pos  " + mortgagePos);
+		
+		g.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		for(int i = 0; i < players.length; i++) { 
+			if(players[i].getMoney() < 0 ) { 
+				g.drawString("Player " + i + " HAS NEGATIVE MONEY!!  " , 1045, 600);
+				g.drawString("DECLARE BANKRUPTCY OR RAISE MONEY BY:  " , 1045, 625);
+				g.drawString("Morgagting Property to Bank (for half price paid) "  , 1045, 650);
+				bankrupt = true; 
+			}
+		}
+		
+		if(properties[mortgagePos].getOwner() == turn) { 
+			mortgage();
+		}
+		
+		
+		
+		g.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		if(didMortgage ) { 
+			g.drawString("Player " + turn + " Mortgaged " + properties[mortgagePos].getName() + " For $" + properties[mortgagePos].getPrice() /2 
+					+ " And No Longer Owns It!", 1020, 500);
+		}
+		
+		g.setFont(new Font("Times New Roman", Font.BOLD, 20));
 //		System.out.println("0 Pos " + players[0].getPos()); 
 //		System.out.println("1 Pos " + players[1].getPos()); 
 		Graphics2D g2 = (Graphics2D) g;
@@ -609,20 +683,74 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		int mx = (int) arg0.getX();
 		int my = (int) arg0.getY();
 		 System.out.println(mx + " " + my);
-		if (arrived && mx >= 1040 & mx <= 1140 && my >= 60 && my <= 118) {
+		 
+		
+		if (!bankrupt && arrived && mx >= 1040 & mx <= 1140 && my >= 60 && my <= 118) {
 			buy();
 		}
 
-		if ( rollYet == false && mx >= 1157 & mx <= 1257 && my >= 60 && my <= 118) {
+		if (!bankrupt &&  rollYet == false && mx >= 1157 & mx <= 1257 && my >= 60 && my <= 118) {
 			roll();
 		}
 
-		if (arrived && rollYet  && mx >= 1278 & mx <= 1460 && my >= 60 && my <= 118) {
+		if (!bankrupt && arrived && rollYet  && mx >= 1278 & mx <= 1460 && my >= 60 && my <= 118) {
 			turn++;
 			rollYet = false;
 
 		}
-	}
+		
+		if (bankrupt && mortgage) { 
+			 
+			
+			if(my <= 165 && my >= 0 ) { 
+				int counter = 21; 
+				for(int x =139; counter < 30; x+= 81, counter++) { 
+					if(mx >= x && mx <= x + 81) { 
+						mortgagePos = counter; 
+						System.out.println("mortgage " + counter); 
+						
+					}
+				}
+			}
+			
+			 if(my >= 897 && my <= 1050 ) { 
+				int counter = 9; 
+				for(int x = 139; counter > 0; x+= 81, counter--) { 
+					if(mx >= x && mx <= x + 81) { 
+						mortgagePos = counter; 
+						System.out.println("mortgage " + counter); 
+					}
+				}
+			}
+		}
+		
+		 if(mx <= 140 && mx >= 0 ) { 
+			int counter = 10; 
+			for(int y = 898; counter < 20; y-= 80, counter++) { 
+				if(my >= y && my <= y + 81) { 
+					mortgagePos = counter; 
+					System.out.println("mortgage " + counter); 
+					
+				}
+			}
+		}
+		 if(mx <= 1011 && mx >= 875 ) { 
+			int counter = 31; 
+			for(int y = 161; counter < 40; y+= 80, counter++) { 
+				if(my >= y && my <= y + 81) { 
+					mortgagePos = counter; 
+					System.out.println("mortgage " + counter); 
+					
+				}
+			}
+		}
+		
+			                        
+		}
+		
+		
+		
+	//}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
@@ -667,6 +795,16 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 //			buy();
 //		}
 
+//		if (mortgage && arg0.getKeyCode() == 77) {
+//			mortgage = false; 
+//			System.out.println("mortgage " + mortgage);
+//		}
+//		
+		if (!mortgage && arg0.getKeyCode() == 77) {
+			mortgage = true; 
+			System.out.println("mortgage " + mortgage);
+		}
+		
 	}
 
 	@Override

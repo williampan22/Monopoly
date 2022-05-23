@@ -13,7 +13,7 @@ public class Player {
 	int pos = 0;
 	int playerNumber;
 	String avatar;  
-	int money = 1500;
+	int money = 150;
 	ArrayList<Integer> propertiesOwned = new ArrayList<Integer>();
 	int x = 920; 
 	int y = 900;
