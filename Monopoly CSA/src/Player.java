@@ -13,7 +13,7 @@ public class Player {
 	int pos = 0;
 	int playerNumber;
 	String avatar;  
-	int money = 150;
+	int money = 1500;
 	ArrayList<Integer> propertiesOwned = new ArrayList<Integer>();
 	int x = 920; 
 	int y = 900;
@@ -28,6 +28,24 @@ public class Player {
 	int vx = 0;
 	int vy = 0;
 	int numUtilities;
+	boolean bankrupt = false;
+	boolean arrived = true;
+
+	public boolean getArrived() {
+		return arrived;
+	}
+
+	public void setArrived(boolean arrived) {
+		this.arrived = arrived;
+	}
+
+	public boolean isBankrupt() {
+		return bankrupt;
+	}
+
+	public void setBankrupt(boolean bankrupt) {
+		this.bankrupt = bankrupt;
+	}
 
 	public Player(int playerNumber, int pos, String avatar, int width, int height, int numRailRoads, int numUtilities) {
 		this.playerNumber = playerNumber;

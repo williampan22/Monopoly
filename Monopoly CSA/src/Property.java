@@ -6,7 +6,7 @@ public class Property { //aass
 	private int y; 
 	private int owner; 
 	private int price; //price to buy propertyssssssssssssssss
-	private int pay;  //price you pay when you land on property
+	private int pay;  //price you pay when you land on propertys
 	
 	public Property(String name, int owner, int x, int y, int price, int pay) { 
 		this.name =  name; 
