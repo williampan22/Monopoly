@@ -27,7 +27,6 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	Dice dice = new Dice(1150, -10);
 	int gameChecker;
 	int finalPlayer;
-	
 	Player player0 = new Player(0, 0, "Car.png", 53, 39, 0, 0);
 	Player player1 = new Player(1, 0, "Dog.png", 48, 32, 0, 0);
 	Player player2 = new Player(2, 0, "Hat.png", 0, 0, 0, 0);
@@ -38,7 +37,6 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	boolean haveToPay = false;
 	boolean enoughMoney = false;
 	boolean onlyPayOnce = false;
-	boolean arrived = false; 
 	boolean triedToBuy = false; 
 //	boolean bankrupt = false; 
 	boolean mortgage = false; 
@@ -47,6 +45,10 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	int railRoadPay = 0;
 	int utilitiesPay = 0;
 	int mortgagePos; 
+	int chance; 
+	int communityChest = 0; 
+	boolean chanceYet = false; 
+	boolean chestYet = false; 
 	boolean didMortgage = false; 
 	
 	
@@ -109,7 +111,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		int dice2 = (int) (Math.random() * 6 + 1);
 		this.dice1 = dice1;
 		this.dice2 = dice2;
-		return dice1 + dice2;
+		return 17;
 		
 	}
 
@@ -131,7 +133,8 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		didBuy = false;
 		haveToPay = false;
 		onlyPayOnce = false;
-		arrived = false; 
+		chanceYet = false; 
+		chestYet = false; 
 		didMortgage = false; 
 		triedToBuy = false; 
 		
@@ -178,10 +181,6 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		}
 		triedToBuy = true; 
 	}
-
-	public void passGo() { 
-		
-	}
 	
 	
 	public void pay() {
@@ -193,9 +192,9 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		players[properties[players[turn].getNewPosition()].getOwner()]
 				.setMoney(players[properties[players[turn].getNewPosition()].getOwner()].getMoney()
 						+ properties[players[turn].getNewPosition()].getPay());
-		onlyPayOnce = true;
+		
 		System.out.println(turn + "paid" + properties[players[turn].getNewPosition()].getPay());
-
+		onlyPayOnce = true;
 	}
 
 	public int payRailRoad() {
@@ -277,12 +276,77 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		
 	}
 	
-	public void bankruptcy() { 
-		
+	public void chance() { 
+		int num = (int) (Math.random() * 2) ;
+		chance = num; 
+		System.out.println(num);
+		switch(num) { 
+		case 0: 
+			players[turn].setMoney(players[turn].getMoney() + 200);
+			break; 
+		case 1: 
+			players[turn].setMoney(players[turn].getMoney() - 200);
+			break; 
+//		case 2: 
+//			chance2.start();
+//			chance2.setRepeats(false);
+//			
+//			break; 
+//		case 3: 
+//			chance3.start();
+//			chance3.setRepeats(false);
+//			
+//			break; 
+//		case 4: 
+//			chance4.start();
+//			chance4.setRepeats(false);
+//			
+//			break; 
+		}
+	}
+	
+//	Timer chance2 = new Timer( 2000, new ActionListener() {
+//		@Override
+//		
+//		public void actionPerformed(ActionEvent arg0) {
+//			//players[turn].setPos(30);
+//			players[turn].setNewPosition(30);
+//		}
+//	});
+//	Timer chance3 = new Timer( 2000, new ActionListener() {
+//		@Override
+//		
+//		public void actionPerformed(ActionEvent arg0) {
+//			//players[turn].setPos(0);
+//			players[turn].setNewPosition(0);
+//		}
+//	});
+//	Timer chance4 = new Timer( 2000, new ActionListener() {
+//		@Override
+//		
+//		public void actionPerformed(ActionEvent arg0) {
+//			//players[turn].setPos(35);
+//			players[turn].setNewPosition(35);
+//		}
+//	});
+//	
+	
+	
+	private void communityChest() { 
+		int num = (int) (Math.random() * 2) ;
+		communityChest = num; 
+		System.out.println(num);
+		switch(num) { 
+		case 0: 
+			players[turn].setMoney(players[turn].getMoney() + 200);
+			break; 
+		case 1: 
+			players[turn].setMoney(players[turn].getMoney() - 200);
+			break; 
+	}
 	}
 	
 	
-
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		
@@ -316,7 +380,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		g.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		if(didMortgage ) { 
 			g.drawString("Player " + turn + " Mortgaged " + properties[mortgagePos].getName() + " For $" + properties[mortgagePos].getPrice() /2 
-					+ " And No Longer Owns It!", 1020, 500);
+					+ " And No Longer Owns It!", 1020, 700);
 		}
 		
 		g.setFont(new Font("Times New Roman", Font.BOLD, 20));
@@ -505,18 +569,50 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		}
 
 		else if ((players[turn].getNewPosition() == 7 || players[turn].getNewPosition() == 22
-				|| players[turn].getNewPosition() == 36) && rollYet) {
+				|| players[turn].getNewPosition() == 36) && rollYet ) {
 
 			g.drawString("Landed on Chance! Draw a Card!", 1045, 200);
-
+			if(!chanceYet) { 
+			chance(); 
+			chanceYet = true; 
+			} 
+			switch(chance) { 
+			case 0: 
+				g.drawString("CHANCE: Gain $200!", 1045, 300);
+				break; 
+			case 1: 
+				g.drawString("CHANCE: Lose $200!", 1045, 300);
+				break; 
+			case 2: 
+//				g.drawString("GO TO JAIL!", 1045, 300);
+//				break; 
+//			case 3: 
+//				g.drawString("TELEPORT TO GO! GAIN 200!", 1045, 300);
+//				break; 
+//			case 4: 
+//				g.drawString("TELEPORT TO SHORT LINE RAILROAD!", 1045, 300);
+//				break; 
+			}
 		}
 
 		else if ((players[turn].getNewPosition() == 2 || players[turn].getNewPosition() == 17
-				|| players[turn].getNewPosition() == 33) && rollYet) {
-
+				|| players[turn].getNewPosition() == 33) && rollYet ) {
+ 
 			g.drawString("Landed on Community Chest! Draw a Card!", 1045, 200);
 
+			if(!chestYet) { 
+			communityChest(); 
+			chestYet = true; 
+			} 
+			switch(chance) { 
+			case 0: 
+				g.drawString("COMMUNITY CHEST: Gain $200!", 1045, 300);
+				break; 
+			case 1: 
+				g.drawString("COMMUNITY CHEST: Lose $200!", 1045, 300);
+				break; 
 		}
+		} 
 
 		else if (players[turn].getNewPosition() == 4 && rollYet) {
 
@@ -575,6 +671,13 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		if (rollYet && players[turn].getArrived()) {
 			g.drawString("Rolled! End Turn!", 1045, 450);
 			
+			if(players[turn].isBankrupt()) { 
+				g.setFont(new Font("Times New Roman", Font.BOLD, 20));
+
+				g.drawString("To Try To Stay In The Game, Mortgage Properties!", 1045, 500);
+				g.drawString("To Give Up And Lose, Press End Game!", 1045, 535);
+			}
+			
 			g.setColor(Color.BLACK);
 			
 			g2.setStroke(new BasicStroke(5));
@@ -583,7 +686,38 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 			g.drawRect(1180, 30, 185, 60);
 			g.drawString("End Turn", 1190, 70);
 			
+			
+			
 		}
+		
+		if (players[turn].isBankrupt()) {
+			
+			g.setColor(Color.BLACK);
+			
+			
+			g.setFont(new Font("Times New Roman", Font.BOLD, 15));
+			
+			
+			g.drawString("To Mortgage A Property, Press Mortgage Button And Click", 1045, 240);
+			g.drawString("On the Property on the Board Map You Would Like To Mortgage!", 1045, 270);
+			
+			g.drawString("Currently Clicking to Mortgage: " + mortgage , 1180, 390);
+			
+		
+			
+			
+			g2.setStroke(new BasicStroke(5));
+			g.setFont(new Font("Times New Roman", Font.BOLD, 40));
+			
+			g.drawRect(1180, 285, 185, 60);
+			g.drawString("Mortgage", 1190, 325);
+			
+			
+				
+			
+			
+		}
+		
 
 		if (!rollYet) {
 			
@@ -631,7 +765,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 
 		g.setFont(new Font("Times New Roman", Font.BOLD, 14));
 
-		if (haveToPay && arrived && turn != properties[players[turn].getNewPosition()].getOwner()) {
+		if (haveToPay &&  players[turn].getArrived() &&  turn != properties[players[turn].getNewPosition()].getOwner()) {
 
 			if (players[turn].getNewPosition() == 5 || players[turn].getNewPosition() == 15 || players[turn].getNewPosition() == 25
 					|| players[turn].getNewPosition() == 35 ) {
@@ -687,7 +821,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 
 			if (i == 0) { 
 				
-				if(players[i].isBankrupt() == false) {
+				if(players[i].isIn() == true) {
 				g.setColor(Color.BLUE);
 				g.drawRect(1550, i * 1000 / players.length, 400, 1000 / players.length);
 				g.setColor(Color.BLACK);
@@ -711,7 +845,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 				}
 			}
 			if (i == 1) {
-				if(players[i].isBankrupt() == false) {
+				if(players[i].isIn() == true) {
 				g.setColor(Color.GREEN);
 				g.drawRect(1550, i * 1000 / players.length, 400, 1000 / players.length);
 				g.setColor(Color.BLACK);
@@ -735,7 +869,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 				}
 			}
 			if (i == 2) {
-				if(players[i].isBankrupt() == false) {
+				if(players[i].isIn() == true) {
 				g.setColor(Color.ORANGE);
 				g.drawRect(1550, i * 1000 / players.length, 400, 1000 / players.length);
 				g.setColor(Color.BLACK);
@@ -755,7 +889,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 				}
 			}
 			if (i == 3) {
-				if(players[i].isBankrupt() == false) {
+				if(players[i].isIn() == true) {
 				g.setColor(Color.RED);
 				g.drawRect(1550, i * 1000 / players.length, 400, 1000 / players.length);
 				g.setColor(Color.BLACK);
@@ -816,14 +950,19 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 		int my = (int) arg0.getY();
 		 System.out.println(mx + " " + my);
 		 
-		
+		if(players[turn].isBankrupt() && mx >= 1187 & mx <= 1373 && my >= 315 && my <= 373) {
+		 if(!mortgage) {
+				mortgage = true; 
+				}
+		}
+		 
 		 if (mx >= 1200 & mx <= 1310 && my >= 60 && my <= 120 && !rollYet) {
 				roll();
 			}
 			
-			if (players[turn].getArrived() && mx >= 1180 & mx <= 1380 && my >= 60 && my <= 120 && rollYet && players[turn].getArrived()) {
-				if(players[turn].getMoney() <= 0) {
-					players[turn].setBankrupt(true);
+			if (players[turn].getArrived() && players[turn].getVx() == 0 && players[turn].getVy() == 0  && mx >= 1180 & mx <= 1380 && my >= 60 && my <= 120 && rollYet && players[turn].getArrived()) {
+				if(players[turn].bankrupt == true) {
+					players[turn].setIn(false);
 				}
 				turn++;
 				rollYet = false;
@@ -951,9 +1090,14 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 //			System.out.println("mortgage " + mortgage);
 //		}
 //		
-		if (!mortgage && arg0.getKeyCode() == 77) {
+		if (arg0.getKeyCode() == 77 && players[turn].isBankrupt()) {
+			if(!mortgage) {
 			mortgage = true; 
-			System.out.println("mortgage " + mortgage);
+			}
+			if(mortgage) {
+			mortgage = false; 
+			}
+				
 		}
 		
 	}

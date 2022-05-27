@@ -13,7 +13,7 @@ public class Player {
 	int pos = 0;
 	int playerNumber;
 	String avatar;  
-	int money = 1500;
+	int money = 100;
 	ArrayList<Integer> propertiesOwned = new ArrayList<Integer>();
 	int x = 920; 
 	int y = 900;
@@ -30,6 +30,16 @@ public class Player {
 	int numUtilities;
 	boolean bankrupt = false;
 	boolean arrived = true;
+	boolean isIn = true;
+	
+
+	public boolean isIn() {
+		return isIn;
+	}
+
+	public void setIn(boolean isIn) {
+		this.isIn = isIn;
+	}
 
 	public boolean getArrived() {
 		return arrived;
@@ -38,6 +48,7 @@ public class Player {
 	public void setArrived(boolean arrived) {
 		this.arrived = arrived;
 	}
+	
 
 	public boolean isBankrupt() {
 		return bankrupt;
