@@ -849,7 +849,7 @@ if(startScreen) {
 			g.drawRect(1010, 10, 525, 972);
 	
 
-		//g2.setStroke(new BasicStroke(10));
+		//g2.setStroke(new BasicStroke(10));s
 
 		g.setFont(new Font("Times New Roman", Font.BOLD, 20));
 

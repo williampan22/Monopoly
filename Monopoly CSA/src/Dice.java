@@ -9,7 +9,7 @@ import java.net.URL;
 
 public class Dice{
 	
-	//add location attributesasassss
+	//add location attributesasasssss
 	private Image img; 	
 	private AffineTransform tx;
 
