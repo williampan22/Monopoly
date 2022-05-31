@@ -29,7 +29,7 @@ public class Board extends JPanel implements ActionListener, MouseListener, KeyL
 	int finalPlayer;
 	Player player0 = new Player(0, 0, "Car.png", 53, 39, 0, 0);
 	Player player1 = new Player(1, 0, "Dog.png", 48, 32, 0, 0);
-	Player player2 = new Player(2, 0, "Hat.png", 0, 0, 0, 0);
+	Player player2 = new Player(2, 0, "Hat2.png", 0, 0, 0, 0);
 	int turn = 0;
 	int numPlayers = 0;
 	boolean rollYet = false;
