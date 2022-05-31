@@ -8,7 +8,7 @@ import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
-public class Player {
+public class Player {//a
 
 	int pos = 0;
 	int playerNumber;

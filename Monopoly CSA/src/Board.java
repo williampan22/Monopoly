@@ -857,7 +857,7 @@ if(startScreen) {
 			g.drawLine(1550, i * 1000 / numPlayers, 1900, i * 1000 / numPlayers);
 
 			// g.fillRect(1550, i*1000/players.length-1000/players.length, 400,
-			// 1000/players.length);
+			// 1000/players.length);s
 
 if (i == 0) { 
 				

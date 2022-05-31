@@ -14,7 +14,7 @@ public class Dice{
 	private AffineTransform tx;
 
 	public Dice(int x, int y) {
-		img = getImage("/imgs/dice rolling gif.gif"); //load the image for Treessssssssss
+		img = getImage("/imgs/dice rolling gif.gif"); //load the image for Treesssssssssss
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y); 				//initialize the location of the image
 									//use your variables
