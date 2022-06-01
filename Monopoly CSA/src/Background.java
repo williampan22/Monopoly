@@ -9,24 +9,24 @@ import java.net.URL;
 
 public class Background{
 	
-	//add location attributesasassssassss
+
 	private Image img; 	
 	private AffineTransform tx;
 
 	public Background(int x, int y) {
-		img = getImage("/imgs/board.png"); //load the image for Treessssssssssss
+		//board image 
+		img = getImage("/imgs/board.png"); 
 		tx = AffineTransform.getTranslateInstance(x, y );
-		init(x, y); 				//initialize the location of the image
-									//use your variables
+		init(x, y); 				
 	}
 
 	
 	public void paint(Graphics g) {
-		//these are the 2 lines of code needed draw an image on the screen
+		
 		Graphics2D g2 = (Graphics2D) g;
 		
 		
-		//call update to update the actualy picture locationa
+	
 		update();
 		
 		

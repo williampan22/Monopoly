@@ -9,24 +9,23 @@ import java.net.URL;
 
 public class Dice{
 	
-	//add location attributesasasssss
+	
 	private Image img; 	
 	private AffineTransform tx;
 
 	public Dice(int x, int y) {
-		img = getImage("/imgs/dice rolling gif.gif"); //load the image for Treesssssssssss
+		img = getImage("/imgs/dice rolling gif.gif"); 
 		tx = AffineTransform.getTranslateInstance(x, y );
-		init(x, y); 				//initialize the location of the image
-									//use your variables
+		init(x, y); 				
 	}
 
 	
 	public void paint(Graphics g) {
-		//these are the 2 lines of code needed draw an image on the screen
+		
 		Graphics2D g2 = (Graphics2D) g;
 		
 		
-		//call update to update the actualy picture locationa
+		
 		update();
 		
 		

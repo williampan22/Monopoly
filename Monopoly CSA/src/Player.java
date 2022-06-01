@@ -8,8 +8,9 @@ import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
-public class Player {//as
+public class Player {
 
+	//player variables
 	int pos = 0;
 	int playerNumber;
 	String avatar;  
@@ -33,7 +34,8 @@ public class Player {//as
 	boolean isIn = true;
 	int inJail = 0;
 	
-
+	
+	//getters, setters
 	public int getInJail() {
 		return inJail;
 	}
@@ -70,24 +72,24 @@ public class Player {//as
 	public Player(int playerNumber, int pos, String avatar, int width, int height, int numRailRoads, int numUtilities) {
 		this.playerNumber = playerNumber;
 		this.avatar = avatar;
-			img = getImage("/imgs/" + avatar); //load the image for Treesssssssssss
+			img = getImage("/imgs/" + avatar); 
 			tx = AffineTransform.getTranslateInstance(x, y );
 			this.pos = pos;
 			this.width = width; 
 			this.height = height;
 			this.numRailRoads = 0; 
 			this.numUtilities = 0; 
-			init(x, y); 				//initialize the location of the image
+			init(x, y); 				
 			
-			//use your variabless
+			
 	}
 
 		public void paint(Graphics g) {
-			//these are the 2 lines of code needed draw an image on the screen
+			
 			Graphics2D g2 = (Graphics2D) g;
 			
 			
-			//call update to update the actually picture location
+		
 			update();
 			
 			
@@ -98,7 +100,7 @@ public class Player {//as
 			
 
 		}
-		/* update the picture variable locssssations */
+	
 		private void update() {
 
 			tx.setToTranslation(x + bounceX, y + bounceY);

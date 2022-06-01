@@ -1,13 +1,16 @@
 
-public class Property { //aasssss
+public class Property { 
 	
+	//variables for each property
 	private String name;
 	private int x; 
 	private int y; 
 	private int owner; 
-	private int price; //price to buy propertyssssssssssssssss
-	private int pay;  //price you pay when you land on propertys
+	private int price; 
+	private int pay;  
 	
+	
+	//property constructor - 40 properties in an array in board class
 	public Property(String name, int owner, int x, int y, int price, int pay) { 
 		this.name =  name; 
 		this.x = x; 
@@ -17,7 +20,7 @@ public class Property { //aasssss
 		this.pay = pay; 
 	}
 	
-	
+	//getters and setters
 	public String getName() {
 		return name;
 	}
