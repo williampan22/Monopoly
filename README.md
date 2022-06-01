@@ -24,6 +24,8 @@ If the player lands on a property that is not yet owned, they can purcahese the 
 
 At the start of the game, click either "2 Players" or "3 Players" depending on how many players you want to play with. The game starts with Player 0, and rotates to Player 1 (and Player 2 if 3 players), and returns to Player 0's turn until the game is over. 
 
+[![beginning.png](https://i.postimg.cc/sgx97jkB/beginning.png)](https://postimg.cc/9D37jhFV)
+
 To roll, click the Roll Button. The dice rolled and distance moved will be shown, with your current position to the right in the UI Interface. 
 
 To buy a property, click the Buy Property Button. If the purcahse is successful, there will be a successful message, you will lose money, and the properties owned list will be updated. If unsucessful (not enough money), an error message will be shown. 
