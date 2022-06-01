@@ -8,7 +8,7 @@ The Monopoly board consists of 40 properties, with the corners being GO (the sta
 
 The player moves by rolling two dice every turn, labeled from one to six. The sum of the dice (ranging from 2-12) is the distance the player moves from its current position. 
 
-Chance and Community Chests are positions in the board which cannot be owned. When the player lands on a Chance or Community Card, the player draws a card which either grants them the following: 
+Chance and Community Chests are positions in the board which cannot be owned. When the player lands on a Chance or Community Card, the player draws a card which grants one of the following: 
 
 1) Gain $200
 2) Lose $200 
@@ -24,16 +24,27 @@ If the player lands on a property that is not yet owned, they can purcahese the 
 
 ## How to Play
 
+At the start of the game, click either "2 Players" or "3 Players" depending on how many players you want to play with. The game starts with Player 0, and rotates to Player 1 (and Player 2 if 3 players), and returns to Player 0's turn until the game is over. 
+
+To roll, click the Roll Button. The dice rolled and distance moved will be shown, with your current position to the right in the UI Interface. 
+
+To buy a property, click the Buy Property Button. If the purcahse is successful, there will be a successful message, you will lose money, and the properties owned list will be updated. If unsucessful (not enough money), an error message will be shown. 
+
+To end turn, click the End Turn Button. 
+
+To mortgage a property (only available if negative money), click the Mortgage Button and then the property you wish to mortgage on the board screen. 
+
 ## Installation
 
-
-
-## Roadmap 
-
-
+This Monopoly game is playable on any device that can compile Java. However, the frame resolution is 1900 x 1035 pixels, so your monitor resolution must be big enough to view and play the game properly. 
 
 ## Project Status 
 
+This project was made for the Quarter 4 AP Computer Science Class at Westview High School. 
+
+The project was finished on 5/31/2022. 
+
+Almost all aspects of Monopoly have been coded into the game. Features that can be added are hotels, more community chests and chance cards, and more players. 
 
 ## Walkthrough of Code
 
