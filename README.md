@@ -2,6 +2,8 @@
 
 ## Description
 
+[url=https://postimg.cc/mtV6k8JP][img]https://i.postimg.cc/mtV6k8JP/start-of-game.png[/img][/url]
+
 We recreated the Monopoly game owned by Hasbro in Java. The game consists of players rolling dice to move around the board, buying properties, collecting money, drawing cards, and winning by being the last alive. When players have no more money (negative money) and owe money to the bank or other players, they must sell or morgtage their properties to achieve enough money to pay their debts back. When players have no more money, they lose and are out of the game. 
 
 The Monopoly board consists of 40 properties, with the corners being GO (the starting position), Visting Jail / Jail, Free Parking, and Go TO JAIL. Passing GO gives the player $200, while being in Jail makes the player not able to move for 3 moves. 
@@ -28,9 +30,15 @@ At the start of the game, click either "2 Players" or "3 Players" depending on h
 
 To roll, click the Roll Button. The dice rolled and distance moved will be shown, with your current position to the right in the UI Interface. 
 
+[![board.png](https://i.postimg.cc/XYK3KW9b/board.png)](https://postimg.cc/TKPZGZk7)
+
 To buy a property, click the Buy Property Button. If the purcahse is successful, there will be a successful message, you will lose money, and the properties owned list will be updated. If unsucessful (not enough money), an error message will be shown. 
 
+[![end-turn.png](https://i.postimg.cc/j5fr5rxm/end-turn.png)](https://postimg.cc/tZ9cSwVN)
+
 To end turn, click the End Turn Button. 
+
+[![mortgage.png](https://i.postimg.cc/ydHLmqhw/mortgage.png)](https://postimg.cc/Mc90wFFD)
 
 To mortgage a property (only available if negative money), click the Mortgage Button and then the property you wish to mortgage on the board screen. 
 
@@ -45,8 +53,6 @@ This project was made for the Quarter 4 AP Computer Science Class at Westview Hi
 The project was finished on 5/31/2022. 
 
 Almost all aspects of Monopoly have been coded into the game. Features that can be added are hotels, more community chests and chance cards, and more players. 
-
-## Walkthrough of Code
 
 ## Author and Acknowledgements
 
