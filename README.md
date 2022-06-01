@@ -34,11 +34,7 @@ To roll, click the Roll Button. The dice rolled and distance moved will be shown
 
 To buy a property, click the Buy Property Button. If the purcahse is successful, there will be a successful message, you will lose money, and the properties owned list will be updated. If unsucessful (not enough money), an error message will be shown. 
 
-[![end-turn.png](https://i.postimg.cc/j5fr5rxm/end-turn.png)](https://postimg.cc/tZ9cSwVN)
-
 To end turn, click the End Turn Button. 
-
-[![mortgage.png](https://i.postimg.cc/ydHLmqhw/mortgage.png)](https://postimg.cc/Mc90wFFD)
 
 To mortgage a property (only available if negative money), click the Mortgage Button and then the property you wish to mortgage on the board screen. 
 
@@ -53,6 +49,8 @@ This project was made for the Quarter 4 AP Computer Science Class at Westview Hi
 The project was finished on 5/31/2022. 
 
 Almost all aspects of Monopoly have been coded into the game. Features that can be added are hotels, more community chests and chance cards, and more players. 
+
+Playthrough Snippet of Game: https://youtu.be/C0_TsifJUCs
 
 ## Author and Acknowledgements
 
