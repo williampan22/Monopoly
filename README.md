@@ -20,8 +20,6 @@ If the player lands on a property that is not yet owned, they can purcahese the 
 2) If the property is a utility the pay depends on the amount of utiltiies owned by the player: 1 = twice the dice rolled, 2 = four times the dice rolled
 3) Otherwise, the amount of pay is specific to the property owned
 
-![]()
-
 ## How to Play
 
 At the start of the game, click either "2 Players" or "3 Players" depending on how many players you want to play with. The game starts with Player 0, and rotates to Player 1 (and Player 2 if 3 players), and returns to Player 0's turn until the game is over. 
@@ -47,7 +45,6 @@ The project was finished on 5/31/2022.
 Almost all aspects of Monopoly have been coded into the game. Features that can be added are hotels, more community chests and chance cards, and more players. 
 
 ## Walkthrough of Code
-
 
 ## Author and Acknowledgements
 
